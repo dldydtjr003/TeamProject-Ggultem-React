@@ -26,52 +26,55 @@ export default function Header() {
   };
 
   return (
-    <header className="custom-header">
-      <nav className="nav-container">
+    <header className="header-custom-header">
+      <nav className="header-nav-container">
         {/* 로고 영역 */}
-        <div className="nav-left">
-          <Link to="/" className="nav-logo">
+        <div className="header-nav-left">
+          <Link to="/" className="header-nav-logo">
             <img src={logoImg} alt="꿀템 로고" className="header-logo-img" />
           </Link>
         </div>
 
         {/* 메뉴 영역 */}
-        <div className="nav-center">
-          <Link to="/itemBoard" className="nav-link">
+        <div className="header-nav-center">
+          <Link to="/itemBoard" className="header-nav-link">
             중고거래
           </Link>
-          <Link to="/report" className="nav-link">
+          <Link to="/report" className="header-nav-link">
             사기조회
           </Link>
-          <Link to="/board/list" className="nav-link">
+          <Link to="/board/list" className="header-nav-link">
             커뮤니티
           </Link>
-          <Link to="/notice/list" className="nav-link">
+          <Link to="/notice/list" className="header-nav-link">
             공지사항
           </Link>
-          <Link to="/business" className="nav-link">
+          <Link to="/business" className="header-nav-link">
             비즈니스
           </Link>
         </div>
 
-        <div className="nav-right">
+        <div className="header-nav-right">
           {loginState ? (
             // ✅ 로그인 성공 시: 닉네임과 로그아웃 버튼
-            <div className="user-menu">
+            <div className="header-user-menu">
               <Link
                 //to={`/mypage/${loginState.email}`}
                 to={`/mypage`}
-                className="user-nickname"
+                className="header-user-nickname"
               >
                 🍯 {loginState.nickname}님
               </Link>
-              <button onClick={handleLogout} className="nav-auth-btn logout">
+              <button
+                onClick={handleLogout}
+                className="header-nav-auth-btn logout"
+              >
                 로그아웃
               </button>
             </div>
           ) : (
             // ✅ 로그아웃 상태 시: 로그인 버튼
-            <Link to="/login" className="nav-auth-btn">
+            <Link to="/login" className="header-nav-auth-btn">
               로그인
             </Link>
           )}
