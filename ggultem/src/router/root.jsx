@@ -15,6 +15,8 @@ const KakaoRedirect = lazy(() => import("../pages/KakaoRedirectPage")); // 경�
 //* 마이페이지 lazy */
 const MyPage = lazy(() => import("../pages/MyPage/MyPage"));
 const Modify = lazy(() => import("../pages/MyPage/ModifyPage"));
+//* 공지사항 lazy */
+const NoticeList = lazy(() => import("../pages/Notice/NoticePage"));
 //* 커뮤니티 lazy */
 const BoardList = lazy(() => import("../pages/Board/BoardListPage"));
 const root = createBrowserRouter([
@@ -90,6 +92,15 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <BoardList />
+      </Suspense>
+    ),
+  },
+  /* ===== 공지사항 ===== */
+  {
+    path: "/notice/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <NoticeList />
       </Suspense>
     ),
   },

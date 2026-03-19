@@ -56,16 +56,16 @@ const MainPage = () => {
 
         {/* 하단 버튼형 메뉴 */}
         <div className="content-wrapper-wide">
-          <Link to="/itemBoard" className="content-card-wide">
+          <Link to="/itemBoard/list" className="content-card-wide">
             <div className="content-box">중고거래</div>
           </Link>
           <Link to="/report" className="content-card-wide">
             <div className="content-box">사기조회</div>
           </Link>
-          <Link to="/board" className="content-card-wide">
+          <Link to="/board/list" className="content-card-wide">
             <div className="content-box">커뮤니티</div>
           </Link>
-          <Link to="/notice" className="content-card-wide">
+          <Link to="/notice/list" className="content-card-wide">
             <div className="content-box">공지사항</div>
           </Link>
         </div>

@@ -46,7 +46,7 @@ export default function Header() {
           <Link to="/board/list" className="nav-link">
             커뮤니티
           </Link>
-          <Link to="/notice" className="nav-link">
+          <Link to="/notice/list" className="nav-link">
             공지사항
           </Link>
           <Link to="/business" className="nav-link">
