@@ -1,6 +1,6 @@
 /* Header.css */
 
-.custom-header {
+.header-custom-header {
   width: 1920px;
   height: 80px;
   background-color: #ffffff;
@@ -13,7 +13,7 @@
   box-shadow: 0 4px 15px rgba(63, 46, 27, 0.05);
 }
 
-.nav-container {
+.header-nav-container {
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
@@ -24,7 +24,7 @@
 }
 
 /* 로고 스타일 */
-.nav-logo {
+.header-nav-logo {
   text-decoration: none;
   font-size: 28px;
   font-weight: 900;
@@ -34,17 +34,17 @@
   gap: 8px;
 }
 
-.logo-icon {
+.header-logo-icon {
   font-size: 32px;
 }
 
 /* 메뉴 스타일 */
-.nav-center {
+.header-nav-center {
   display: flex;
   gap: 40px;
 }
 
-.nav-link {
+.header-nav-link {
   text-decoration: none;
   font-size: 18px;
   font-weight: 700;
@@ -54,13 +54,13 @@
   transition: all 0.3s ease;
 }
 
-.nav-link:hover {
+.header-nav-link:hover {
   color: var(--honey-color);
   background-color: var(--soft-yellow);
 }
 
 /* 우측 버튼 (로그인 등) */
-.nav-auth-btn {
+.header-nav-auth-btn {
   text-decoration: none;
   font-size: 16px;
   font-weight: 800;
@@ -72,7 +72,7 @@
   transition: 0.3s;
 }
 
-.nav-auth-btn:hover {
+.header-nav-auth-btn:hover {
   background-color: var(--honey-color);
   color: #fff;
 }
@@ -85,34 +85,34 @@
   transition: transform 0.3s ease;
 }
 
-.nav-logo:hover .header-logo-img {
+.header-nav-logo:hover .header-logo-img {
   transform: scale(1.05); /* 마우스 올렸을 때 살짝 커지는 효과 */
 }
 
 /* 기존 nav-logo의 flex 설정 유지 */
-.nav-logo {
+.header-nav-logo {
   text-decoration: none;
   display: flex;
   align-items: center;
 }
-.user-menu {
+.header-user-menu {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.user-nickname {
+.header-user-nickname {
   font-weight: 800;
   color: var(--bee-brown);
   font-size: 16px;
 }
 
-.nav-auth-btn.logout {
+.header-nav-auth-btn.logout {
   background-color: #f1f1f1;
   border-color: #ddd;
 }
 
-.nav-auth-btn.logout:hover {
+.header-nav-auth-btn.logout:hover {
   background-color: var(--bee-brown);
   color: var(--honey-color);
 }
