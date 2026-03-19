@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
 import { getList, API_SERVER_HOST } from "../../api/BoardApi";
 import useCustomMove from "../../hooks/useCustomMove";
+import PageComponent from "../common/PageComponent";
+import "./BoardListComponent.css";
 
 const initState = {
-  email: "",
-  title: "",
-  writer: "",
-  content: "",
-  viewCount: 0,
-  regDate: null,
-  uploadFileNames: [],
+  dtoList: [],
+  pageNumList: [],
+  pageRequestDTO: null,
+  prev: false,
+  next: false,
+  totoalCount: 0,
+  prevPage: 0,
+  nextPage: 0,
+  totalPage: 0,
+  current: 0,
 };
 
 const host = API_SERVER_HOST;
 
 const BoardList = () => {
-  const { page, size, keyword, searchType, refresh } = useCustomMove();
+  const { page, size, keyword, searchType, refresh, moveToBoardList } =
+    useCustomMove();
   const [serverData, setServerData] = useState(initState);
 
   useEffect(() => {
@@ -30,22 +36,24 @@ const BoardList = () => {
         {/* 상단 헤더 섹션 */}
         <div className="board-header">
           <h2 className="board-title">🍯 꿀템 커뮤니티</h2>
-          <p className="board-subtitle">자유롭게 정보를 나누고 소통해보세요!</p>
+          <p className="board-subtitle">
+            유용한 정보와 일상을 공유하는 공간입니다.
+          </p>
 
           <div className="board-actions">
             <span className="total-count">
-              전체 게시글 {serverData.totalCount || 0}개
+              전체 게시글 {serverData.totalCount}개
             </span>
             <button
               className="write-btn"
               //onClick={() => navigate("/board/register")}
             >
-              글쓰기 ✍️
+              새 글 쓰기 ✍️
             </button>
           </div>
         </div>
 
-        {/* 테이블 섹션 */}
+        {/* 게시판 테이블 영역 */}
         <div className="table-responsive">
           <table className="board-table">
             <thead>
@@ -53,8 +61,8 @@ const BoardList = () => {
                 <th className="th-no">번호</th>
                 <th className="th-title">제목</th>
                 <th className="th-writer">작성자</th>
-                <th className="th-date">날짜</th>
-                <th className="th-views">조회수</th>
+                <th className="th-date">등록일</th>
+                <th className="th-views">조회</th>
               </tr>
             </thead>
             <tbody>
@@ -77,9 +85,7 @@ const BoardList = () => {
                     </td>
                     <td className="td-writer">{board.writer}</td>
                     <td className="td-date">
-                      {board.regDate
-                        ? board.regDate.substring(0, 10)
-                        : "2026-03-19"}
+                      {board.regDate ? board.regDate.substring(0, 10) : ""}
                     </td>
                     <td className="td-views">{board.viewCount}</td>
                   </tr>
@@ -87,7 +93,7 @@ const BoardList = () => {
               ) : (
                 <tr>
                   <td colSpan="5" className="empty-row">
-                    게시글이 존재하지 않습니다. 첫 번째 주인공이 되어보세요!
+                    등록된 게시글이 없습니다. 첫 소식을 전해보세요!
                   </td>
                 </tr>
               )}
@@ -95,8 +101,9 @@ const BoardList = () => {
           </table>
         </div>
 
-        {/* 페이지네이션 들어갈 자리 (필요시 추가) */}
-        {/* <PageComponent serverData={serverData} movePage={moveToList} /> */}
+        <div className="pagination-wrapper">
+          <PageComponent serverData={serverData} movePage={moveToBoardList} />
+        </div>
       </div>
     </div>
   );

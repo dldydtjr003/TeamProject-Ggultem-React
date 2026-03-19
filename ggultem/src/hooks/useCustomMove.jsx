@@ -117,6 +117,7 @@ const useCustomMove = () => {
     moveToBusinessBoardRead,
     moveToBusinessBoardModify,
     moveToMyPageModify,
+    moveToBoardList,
     page,
     size,
     keyword,
