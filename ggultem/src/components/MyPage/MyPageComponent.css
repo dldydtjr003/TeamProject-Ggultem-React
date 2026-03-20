@@ -148,7 +148,14 @@
 .mp-mini-item:last-child { margin-bottom: 0; }
 
 .mp-label { color: #888; }
-.mp-value { font-weight: 700; color: #333; }
+.mp-value-badge{ 
+  width: 80px;
+  height: 25px;
+  border-radius: 10px;
+  background-color: #fff1df;
+  font-weight: 700;
+  color: #ff8c00; 
+}
 
 .mp-badge {
   color: #ff8c00;

@@ -107,7 +107,7 @@ const MyPageMain = ({ email }) => {
                 </div>
                 <div className="mp-mini-item">
                   <span className="mp-label">계정유형</span>
-                  <span className="mp-value badge">
+                  <span className="mp-value-badge">
                     {member.email === "admin@honey.com"
                       ? "관리자"
                       : member.social

@@ -93,8 +93,8 @@ const ModifyComponent = ({ email }) => {
       />
       <InfoModal
         show={infoModal}
-        title={`RESULT`}
-        content={`${result}`}
+        title={`회원의 정보 수정`}
+        content={`${member.nickname}님의 회원 정보 수정이 완료되었습니다.`}
         callbackFn={closeModal}
       />
       <div className="edit-container">
@@ -173,7 +173,9 @@ const ModifyComponent = ({ email }) => {
           )}
 
           <div className="edit-actions">
-            <button className="cancel-btn">취소</button>
+            <button className="cancel-btn" onClick={() => navigate(-1)}>
+              취소
+            </button>
             <button className="save-btn" onClick={() => handleClickModify()}>
               수정 완료
             </button>
