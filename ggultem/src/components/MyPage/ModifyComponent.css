@@ -1,29 +1,31 @@
+/* 전체 배경 및 래퍼 */
 .edit-wrapper {
-  background-color: #f8f9fa;
   min-height: 100vh;
-  padding: 60px 20px;
   display: flex;
   justify-content: center;
+  align-items: flex-start; /* 상단부터 배치 */
+  padding: 60px 20px;
 }
 
+/* 수정 컨테이너: 시원하게 너비 확보 */
 .edit-container {
-  background: #fff;
-  width: 100%;
-  max-width: 500px;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  width: 700px;
+  background: white;
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
 }
 
 .edit-title {
-  text-align: center;
+  font-size: 1.8rem;
   font-weight: 800;
-  font-size: 1.6rem;
-  margin-bottom: 40px;
   color: #222;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-/* 프로필 이미지 편집 영역 */
+/* 프로필 이미지 수정 섹션 */
 .edit-profile-section {
   display: flex;
   flex-direction: column;
@@ -33,98 +35,148 @@
 
 .profile-img-wrapper {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 15px;
 }
 
 .edit-profile-img {
-  width: 100%;
-  height: 100%;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #eee;
+  border: 4px solid #fff9e6;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .img-edit-btn {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background: #222;
-  color: #fff;
-  border: none;
-  width: 35px;
-  height: 35px;
+  right: 5px;
+  bottom: 5px;
+  width: 40px;
+  height: 40px;
+  background-color: #ffd900;
+  border: 3px solid white;
   border-radius: 50%;
-  cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.img-edit-btn:hover { background: #000; }
+.img-edit-btn:hover {
+  transform: scale(1.1);
+  background-color: #ffc400;
+}
+
+.edit-icon {
+  font-style: normal;
+  font-weight: bold;
+  color: #222;
+}
 
 .img-info-text {
   font-size: 0.85rem;
-  color: #999;
-  margin-top: 15px;
+  color: #aaa;
 }
 
-/* 입력 필드 스타일 */
-.edit-form .input-group {
-  margin-bottom: 25px;
+/* 폼 섹션 */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.edit-form label {
-  display: block;
-  font-size: 0.9rem;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group label {
+  font-size: 0.95rem;
   font-weight: 700;
-  color: #555;
-  margin-bottom: 8px;
+  color: #444;
+  padding-left: 5px;
 }
 
-.edit-form input {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+/* .input-group input 부분에 아래 속성을 꼭 추가하세요! */
+.input-group input {
+  width: 100%;             /* 부모 너비에 맞춤 */
+  box-sizing: border-box;  /* 👈 패딩과 테두리를 너비 안으로 포함! */
+  padding: 16px 20px;
+  border: 1px solid #eee;
+  border-radius: 15px;
   font-size: 1rem;
+  background-color: #fdfdfd;
   transition: all 0.2s;
-  box-sizing: border-box;
 }
 
-.edit-form input:focus {
-  border-color: #ffd900;
+.input-group input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.1);
+  border-color: #ffd900;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 217, 0, 0.1);
 }
 
-/* 하단 버튼 */
+/* 비밀번호 섹션 구분선 */
+.password-section {
+  margin-top: 10px;
+  padding-top: 25px;
+  border-top: 1px solid #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 액션 버튼 (취소/저장) */
 .edit-actions {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  display: flex;
   gap: 15px;
   margin-top: 40px;
 }
 
-.save-btn {
-  background: #ffd900;
-  color: #222;
-  border: none;
-  padding: 15px;
-  border-radius: 12px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
 .cancel-btn {
-  background: #eee;
+  flex: 1;
+  padding: 16px;
+  background-color: #f5f5f5;
   color: #666;
   border: none;
-  border-radius: 12px;
+  border-radius: 15px;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-.save-btn:hover { background: #ffc400; }
-.cancel-btn:hover { background: #e0e0e0; }
+.cancel-btn:hover {
+  background-color: #eee;
+}
+
+.save-btn {
+  flex: 2; /* 저장 버튼을 더 크게 */
+  padding: 16px;
+  background-color: #ffd900;
+  color: #222;
+  border: none;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 217, 0, 0.3);
+  transition: all 0.2s;
+}
+
+.save-btn:hover {
+  background-color: #ffc400;
+  transform: translateY(-2px);
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .edit-container {
+    padding: 30px 20px;
+    border-radius: 0; /* 모바일에선 꽉 차게 */
+  }
+}

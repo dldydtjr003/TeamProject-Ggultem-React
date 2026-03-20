@@ -35,10 +35,10 @@ const useCustomMove = () => {
 
   //********************************** MyPage 영역 *************************************
 
-  const moveToMyPageModify = (email) => {
+  const moveToMyPageModify = () => {
     console.log(queryDefault);
     navigate({
-      pathname: `../mypage/modify/${email}`,
+      pathname: `../mypage/modify`,
       search: queryDefault, //수정시에 기존의 쿼리 스트링 유지를 위해
     });
   };
@@ -85,11 +85,39 @@ const useCustomMove = () => {
     });
   };
 
+  //********************************** Board 영역 *************************************
+
+  const moveToBoardList = (pageParam) => {
+    let queryStr = "";
+    if (pageParam) {
+      const pageNum = getNum(pageParam.page, page);
+      const sizeNum = getNum(pageParam.size, size);
+      const keywordStr = getString(pageParam.keyword, keyword);
+      const typeStr = getString(pageParam.searchType, searchType);
+      queryStr = createSearchParams({
+        page: pageNum,
+        size: sizeNum,
+        keyword: keywordStr,
+        searchType: typeStr,
+      }).toString();
+    } else {
+      queryStr = queryDefault;
+    }
+
+    navigate({
+      pathname: `../board/list`,
+      search: queryStr,
+    });
+
+    setRefresh(!refresh);
+  };
+
   return {
     moveToBusinessBoardList,
     moveToBusinessBoardRead,
     moveToBusinessBoardModify,
     moveToMyPageModify,
+    moveToBoardList,
     page,
     size,
     keyword,

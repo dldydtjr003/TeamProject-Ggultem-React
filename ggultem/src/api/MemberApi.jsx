@@ -47,11 +47,29 @@ export const loginPost = async (loginParam) => {
 //*************************** 마이페이지 ******************************* */
 // 마이페이지 정보 가져오기
 export const getMyInfo = async (email) => {
-  const res = await axios.get(`${host}/mypage/${email}`);
+  const res = await axios.get(`${host}/mypage/${encodeURIComponent(email)}`);
+  console.log(res.data);
+  return res.data;
+};
+
+export const getList = async (pageParam) => {
+  const { page, size, keyword, searchType } = pageParam;
+  const res = await axios.get(`${host}/admin/member/list`, {
+    params: {
+      page: page,
+      size: size,
+      keyword: keyword,
+      searchType: searchType,
+    },
+  });
   return res.data;
 };
 
 export const putOne = async (email, formData) => {
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+
   const res = await axios.put(
     `${host}/mypage/${encodeURIComponent(email)}`,
     formData,

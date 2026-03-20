@@ -3,14 +3,53 @@ import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Loading from "../pages/Loading";
 
+//* 관리자 페이지 */
+const AdminMain = lazy(() => import("../pages/admin/MainPage"));
+const AdminLogin = lazy(() => import("../pages/admin/LoginPage"));
+//* 회원관리 페이지 */
+const AdminMemberList = lazy(() => import("../pages/admin/Member/ListPage"));
+
+//* 사용자 페이지 */
 const Main = lazy(() => import("../pages/MainPage"));
 const Login = lazy(() => import("../pages/LoginPage"));
 const Business = lazy(() => import("../pages/Business/MainPage"));
-const KakaoRedirect = lazy(() => import("../pages/KakaoRedirectPage")); // 경로 확인!
+const KakaoRedirect = lazy(() => import("../pages/KakaoRedirectPage"));
+const GoogleRedirect = lazy(() => import("../pages/GoogleRedirectPage"));
 //* 마이페이지 lazy */
 const MyPage = lazy(() => import("../pages/MyPage/MyPage"));
 const Modify = lazy(() => import("../pages/MyPage/ModifyPage"));
+//* 공지사항 lazy */
+const NoticeList = lazy(() => import("../pages/Notice/NoticePage"));
+//* 커뮤니티 lazy */
+const BoardList = lazy(() => import("../pages/Board/BoardListPage"));
 const root = createBrowserRouter([
+  /* ===== 관리자 영역 ===== */
+  /* ===== 메인페이지 연결 영역 ===== */
+  {
+    path: "/admin/",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AdminMain />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/admin/login",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AdminLogin />
+      </Suspense>
+    ),
+  },
+  /* ===== 회원관리 영역 ===== */
+  {
+    path: "/admin/member/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AdminMemberList />
+      </Suspense>
+    ),
+  },
   /* ===== 메인페이지 연결 영역 ===== */
   {
     path: "/",
@@ -40,11 +79,19 @@ const root = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: "google",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <GoogleRedirect />
+          </Suspense>
+        ),
+      },
     ],
   },
   /* ===== 마이페이지 연결 영역 ===== */
   {
-    path: "/mypage/:email",
+    path: "/mypage",
     element: (
       <Suspense fallback={<Loading />}>
         <MyPage />
@@ -52,10 +99,28 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/mypage/modify/:email",
+    path: "/mypage/modify",
     element: (
       <Suspense fallback={<Loading />}>
         <Modify />
+      </Suspense>
+    ),
+  },
+  /* ===== 마이페이지 연결 영역 ===== */
+  {
+    path: "/board/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <BoardList />
+      </Suspense>
+    ),
+  },
+  /* ===== 공지사항 ===== */
+  {
+    path: "/notice/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <NoticeList />
       </Suspense>
     ),
   },

@@ -1,0 +1,80 @@
+/* 페이지네이션 전체 컨테이너 */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px; /* 게시판 테이블과의 간격 확보 */
+  padding-bottom: 20px;
+}
+
+/* 페이지네이션 리스트 (ul) */
+.pagination-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 8px; /* 버튼 사이의 간격 */
+}
+
+/* 각 페이지 아이템 공통 스타일 */
+.page-item {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 12px; /* 살짝 둥근 사각형 */
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  background-color: #fff;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+  user-select: none; /* 텍스트 선택 방지 */
+}
+
+/* 마우스 호버 시 효과 */
+.page-item:hover {
+  background-color: #fff9e6;
+  color: #ffb400;
+  border-color: #ffeeba;
+  transform: translateY(-2px);
+}
+
+/* 현재 활성화된 페이지 (Active) */
+.page-item.active {
+  background-color: #ffd900;
+  color: #222;
+  border-color: #ffd900;
+  box-shadow: 0 4px 10px rgba(255, 217, 0, 0.3);
+  font-weight: 800;
+}
+
+/* 이전/다음 네비게이션 버튼 전용 스타일 */
+.page-nav {
+  background-color: #f8f9fa;
+  color: #aaa;
+  font-weight: bold;
+}
+
+.page-nav:hover {
+  background-color: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+/* 활성화된 버튼 클릭 시 살짝 눌리는 느낌 */
+.page-item:active {
+  transform: scale(0.95);
+}
+
+/* 반응형 모바일 설정 */
+@media (max-width: 480px) {
+  .page-item {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+    gap: 5px;
+  }
+}
