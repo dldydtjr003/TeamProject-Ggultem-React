@@ -66,3 +66,13 @@ export const putOne = async (email, formData) => {
   );
   return res.data;
 };
+
+export const uploadImageApi = async (email, formData) => {
+  // axios.put(url, data, config) 순서입니다.
+  const res = await axios.put(`${host}/mypage/thumbnail/${email}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};

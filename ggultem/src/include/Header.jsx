@@ -37,10 +37,10 @@ export default function Header() {
 
         {/* 메뉴 영역 */}
         <div className="header-nav-center">
-          <Link to="/itemBoard" className="header-nav-link">
+          <Link to="/itemBoard/list" className="header-nav-link">
             중고거래
           </Link>
-          <Link to="/report" className="header-nav-link">
+          <Link to="/report/list" className="header-nav-link">
             사기조회
           </Link>
           <Link to="/board/list" className="header-nav-link">
@@ -49,7 +49,7 @@ export default function Header() {
           <Link to="/notice/list" className="header-nav-link">
             공지사항
           </Link>
-          <Link to="/business" className="header-nav-link">
+          <Link to="/business/list" className="header-nav-link">
             비즈니스
           </Link>
         </div>

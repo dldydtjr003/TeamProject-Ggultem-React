@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./ModifyComponent.css";
-import { getMyInfo, API_SERVER_HOST, putOne } from "../../api/MemberApi";
+import {
+  getMyInfo,
+  API_SERVER_HOST,
+  putOne,
+  uploadImageApi,
+} from "../../api/MemberApi";
 import InfoModal from "../../common/InfoModal";
 import { useNavigate } from "react-router";
-import { login } from "../../slice/loginSlice";
-import { useDispatch } from "react-redux";
 
 const host = API_SERVER_HOST;
 
@@ -77,7 +80,37 @@ const ModifyComponent = ({ email }) => {
     setResult(null);
   };
 
-  const updateProfileImage = () => {};
+  const handleImageChange = (e) => {
+    const files = e.target.files[0];
+    if (!files) return;
+
+    const formData = new FormData();
+    formData.append("files", files);
+    formData.append("email", email); // 누구의 사진인지 식별
+
+    // 1. 별도 API 호출
+    uploadImageApi(email, formData)
+      .then((data) => {
+        if (data.RESULT === "SUCCESS" && data.FILE_NAMES) {
+          alert("프로필 사진이 변경되었습니다! 🍯");
+
+          // 문자열 "[파일명]"에서 [ ]를 제거하고 순수 파일명만 추출
+          const rawFileName = data.FILE_NAMES.replace(/[[\]]/g, "");
+
+          setMember((prev) => ({
+            ...prev,
+            // 리액트 상태에는 배열 형태로 넣어줍니다.
+            uploadFileNames: [rawFileName],
+          }));
+        } else {
+          console.error("서버 응답 형식이 다릅니다:", data);
+        }
+      })
+      .catch((err) => {
+        console.error("이미지 업로드 실패:", err);
+        alert("사진 업로드 중 오류가 발생했습니다.");
+      });
+  };
 
   return (
     <div className="edit-wrapper">
@@ -86,10 +119,7 @@ const ModifyComponent = ({ email }) => {
         type="file"
         ref={uploadRef}
         style={{ display: "none" }}
-        onChange={(e) => {
-          // 선택된 파일명을 미리보기 등으로 활용하고 싶다면 여기서 처리
-          console.log(e.target.files[0]);
-        }}
+        onChange={handleImageChange}
       />
       <InfoModal
         show={infoModal}

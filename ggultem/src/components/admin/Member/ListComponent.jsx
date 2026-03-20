@@ -93,7 +93,9 @@ const ListComponent = () => {
                       <span className="nickname-badge">{member.nickname}</span>
                     </td>
                     <td className="member-td-social">
-                      {member.social ? (
+                      {member.email === "admin@honey.com" ? (
+                        <span className="social-badge admin">Admin</span>
+                      ) : member.social ? (
                         <span className="social-badge kakao">Social</span>
                       ) : (
                         <span className="social-badge general">General</span>

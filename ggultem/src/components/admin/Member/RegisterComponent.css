@@ -1,0 +1,162 @@
+/* RegisterPage 전용 컨테이너 */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    min-height: 80vh;
+}
+
+.register-card {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.register-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ffca28; /* 꿀색 포인트 */
+}
+
+/* 파일 입력 커스텀 */
+.file-input {
+    padding: 10px 0;
+    border: none !important;
+}
+
+.file-help {
+    font-size: 12px;
+    color: #999;
+    margin-top: -5px;
+}
+
+/* 버튼 스타일 */
+.register-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.register-buttons button {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-cancel {
+    background-color: #eee;
+    color: #666;
+}
+
+.btn-cancel:hover {
+    background-color: #ddd;
+}
+
+.btn-submit {
+    background-color: #ffca28; /* 꿀템 테마색 */
+    color: #333;
+}
+
+.btn-submit:hover {
+    background-color: #fbc02d;
+    transform: translateY(-2px);
+}
+/* 프로필 업로드 섹션 중앙 정렬 */
+.profile-upload-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.profile-image-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.profile-image-wrapper:hover {
+    transform: scale(1.05);
+}
+
+/* 동그란 이미지 스타일 */
+.profile-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffca28; /* 꿀템 테마색 */
+}
+
+/* 사진 없을 때 보여줄 기본 원 */
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 14px;
+}
+
+/* 우측 하단 카메라 아이콘 */
+.camera-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #333;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    border: 2px solid white;
+}

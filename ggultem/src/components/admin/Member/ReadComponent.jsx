@@ -112,9 +112,13 @@ const ReadPage = ({ email }) => {
             <div className="memberinfo-row">
               <label>소셜 가입</label>
               <span
-                className={`memberinfo-social-tag ${member.social ? "is-social" : "is-general"}`}
+                className={`memberinfo-social-tag ${member.email === "admin@honey.com" ? "admin" : member.social ? "is-social" : "is-general"}`}
               >
-                {member.social ? "소셜 회원" : "일반 회원"}
+                {member.email === "admin@honey.com"
+                  ? "관리자"
+                  : member.social
+                    ? "소셜 회원"
+                    : "일반 회원"}
               </span>
             </div>
             <div className="memberinfo-row">

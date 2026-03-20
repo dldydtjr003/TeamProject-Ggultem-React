@@ -41,17 +41,23 @@
 .memberinfo-image-box {
     width: 180px;
     height: 180px;
-    border-radius: 12px;
+    border-radius: 50%;
     overflow: hidden;
-    background-color: #eee;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .memberinfo-image-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.memberinfo-no-image {
+    line-height: 180px;
+    text-align: center;
+    color: #adb5bd;
 }
 
 /* 사진 변경 버튼 스타일 */

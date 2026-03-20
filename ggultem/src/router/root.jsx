@@ -12,6 +12,9 @@ const AdminMemberRead = lazy(() => import("../pages/admin/Member/ReadPage"));
 const AdminMemberModify = lazy(
   () => import("../pages/admin/Member/ModifyPage"),
 );
+const AdminMemberRegister = lazy(
+  () => import("../pages/admin/Member/RegisterPage"),
+);
 
 //* 사용자 페이지 */
 const Main = lazy(() => import("../pages/MainPage"));
@@ -26,6 +29,14 @@ const Modify = lazy(() => import("../pages/MyPage/ModifyPage"));
 const NoticeList = lazy(() => import("../pages/Notice/NoticePage"));
 //* 커뮤니티 lazy */
 const BoardList = lazy(() => import("../pages/Board/BoardListPage"));
+const BoardRead = lazy(() => import("../pages/Board/BoardReadPage"));
+//* 판매게시판 lazy */
+const ItemBoardList = lazy(
+  () => import("../pages/ItemBoard/ItemBoardListPage"),
+);
+const ItemBoardRegister = lazy(
+  () => import("../pages/ItemBoard/ItemBoardRegisterPage"),
+);
 const root = createBrowserRouter([
   /* ===== 관리자 영역 ===== */
   /* ===== 메인페이지 연결 영역 ===== */
@@ -51,6 +62,14 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <AdminMemberList />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/admin/member/register",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AdminMemberRegister />
       </Suspense>
     ),
   },
@@ -126,12 +145,37 @@ const root = createBrowserRouter([
       </Suspense>
     ),
   },
+  /* ===== 판매게시판 연결 영역 ===== */
+  {
+    path: "/itemBoard/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ItemBoardList />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/itemBoard/Register",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ItemBoardRegister />
+      </Suspense>
+    ),
+  },
   /* ===== 마이페이지 연결 영역 ===== */
   {
     path: "/board/list",
     element: (
       <Suspense fallback={<Loading />}>
         <BoardList />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/board/read/:boardNo",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <BoardRead />
       </Suspense>
     ),
   },

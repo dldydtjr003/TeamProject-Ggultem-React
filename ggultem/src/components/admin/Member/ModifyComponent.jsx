@@ -26,7 +26,7 @@ const initState = {
 
 const ModifyPage = ({ email }) => {
   const [member, setMember] = useState({ ...initState });
-  const uploadRef = useRef();
+  const nav = useNavigate();
 
   const handleImageChange = (e) => {
     const files = e.target.files[0];
@@ -39,12 +39,20 @@ const ModifyPage = ({ email }) => {
     // 1. 별도 API 호출
     uploadImageApi(email, formData)
       .then((data) => {
-        alert("프로필 사진이 변경되었습니다! 🍯");
-        // 2. 서버에서 받은 새 파일명으로 상태 업데이트 (화면 즉시 반영)
-        setMember({
-          ...member,
-          uploadFileNames: [data.fileName], // 서버 응답 구조에 맞게 수정
-        });
+        if (data.RESULT === "SUCCESS" && data.FILE_NAMES) {
+          alert("프로필 사진이 변경되었습니다! 🍯");
+
+          // 문자열 "[파일명]"에서 [ ]를 제거하고 순수 파일명만 추출
+          const rawFileName = data.FILE_NAMES.replace(/[[\]]/g, "");
+
+          setMember((prev) => ({
+            ...prev,
+            // 리액트 상태에는 배열 형태로 넣어줍니다.
+            uploadFileNames: [rawFileName],
+          }));
+        } else {
+          console.error("서버 응답 형식이 다릅니다:", data);
+        }
       })
       .catch((err) => {
         console.error("이미지 업로드 실패:", err);
@@ -64,14 +72,11 @@ const ModifyPage = ({ email }) => {
   };
 
   const handleClickModify = () => {
-    const files = uploadRef.current.files;
     const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append("files", files[i]);
-    }
 
     formData.append("phone", member.phone);
     formData.append("nickname", member.nickname);
+    formData.append("enabled", member.enabled);
 
     if (member.social) {
       // formData.append("pw", ""); // 서버에서 빈 값일 때 수정을 안 하도록 로직이 짜여있어야 함
@@ -79,11 +84,11 @@ const ModifyPage = ({ email }) => {
       formData.append("pw", member.pw);
     }
 
-    for (let i = 0; i < member.uploadFileNames.length; i++) {
-      formData.append("uploadFileNames", member.uploadFileNames[i]);
-    }
     putOne(email, formData)
-      .then((data) => {})
+      .then(() => {
+        alert("정보 수정이 완료되었습니다.");
+        nav(-1);
+      })
       .catch((error) => {
         console.error("수정 중 오류 발생:", error);
         alert("수정에 실패했습니다.");
@@ -161,7 +166,6 @@ const ModifyPage = ({ email }) => {
               <input
                 type="password"
                 name="pw"
-                value={member.pw || ""}
                 onChange={handleChange}
                 disabled={member.social}
                 placeholder={

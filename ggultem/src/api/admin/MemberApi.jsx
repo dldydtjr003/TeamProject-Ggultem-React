@@ -31,7 +31,7 @@ export const putOne = async (email, formData) => {
   }
 
   const res = await axios.put(
-    `${host}/admin/member/modify/${encodeURIComponent(email)}`,
+    `${host}/admin/member/${encodeURIComponent(email)}`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
@@ -47,5 +47,11 @@ export const uploadImageApi = async (email, formData) => {
       "Content-Type": "multipart/form-data",
     },
   });
+  return res.data;
+};
+
+export const postAdd = async (formData) => {
+  const header = { headers: { "Content-Type": "multipart/form-data" } };
+  const res = await axios.post(`${host}/admin/member/`, formData, header);
   return res.data;
 };
