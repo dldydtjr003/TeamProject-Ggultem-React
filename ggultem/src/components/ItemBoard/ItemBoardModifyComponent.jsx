@@ -14,6 +14,7 @@ const initState = {
   category: "",
   location: "",
   uploadFileNames: [],
+  state: false,
 };
 
 const ItemBoardModifyComponent = () => {
@@ -69,6 +70,7 @@ const ItemBoardModifyComponent = () => {
     formData.append("content", item.content);
     formData.append("category", item.category);
     formData.append("location", item.location);
+    formData.append("status", item.status);
 
     // 유지할 기존 이미지 파일명 목록 추가
     for (let i = 0; i < item.uploadFileNames.length; i++) {
@@ -131,6 +133,32 @@ const ItemBoardModifyComponent = () => {
             <option value="health">건강식품</option>
             <option value="furniture">가구</option>
           </select>
+        </div>
+
+        <div className="form-group">
+          <label>판매 상태</label>
+          <div className="status-radio-group">
+            <label>
+              <input
+                type="radio"
+                name="status"
+                value={false}
+                checked={item.status === false || item.status === "false"}
+                onChange={() => setItem({ ...item, status: false })}
+              />{" "}
+              판매 중
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="status"
+                value={true}
+                checked={item.status === true || item.status === "true"}
+                onChange={() => setItem({ ...item, status: true })}
+              />{" "}
+              판매 완료
+            </label>
+          </div>
         </div>
 
         <div className="form-group">

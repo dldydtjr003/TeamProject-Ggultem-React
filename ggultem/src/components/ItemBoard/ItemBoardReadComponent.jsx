@@ -89,6 +89,11 @@ const ItemBoardReadComponent = () => {
         <div className="info-section">
           <div className="info-main">
             <span className="info-category">{item.category}</span>
+            <span
+              className={`status-badge ${String(item.status) ? "sold-out" : "on-sale"}`}
+            >
+              {String(item.status) === "true" ? "판매 완료" : "판매 중"}
+            </span>
             <h1 className="info-title">{item.title}</h1>
             <h2 className="info-price">{item.price?.toLocaleString()}원</h2>
           </div>
@@ -130,7 +135,10 @@ const ItemBoardReadComponent = () => {
                 </button>
               </div>
             ) : (
-              <button className="chat-btn">판매자와 채팅하기</button>
+              <>
+                <button className="chat-btn">판매자와 채팅하기</button>
+                <button className="chat-btn">장바구니 담기</button>
+              </>
             )}
           </div>
         </div>
