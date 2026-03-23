@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { getList, API_SERVER_HOST } from "../../api/BoardApi";
+import { getList, API_SERVER_HOST } from "../../api/ItemBoardApi";
 import useCustomMove from "../../hooks/useCustomMove";
 import { useNavigate } from "react-router";
 import "./ItemBoardListComponent.css";
-import ItemBoardRegister from "./ItemBoardRegisterComponent";
 
 const initState = {
   dtoList: [],
@@ -16,6 +15,7 @@ const initState = {
   nextPage: 0,
   totalPage: 0,
   current: 0,
+  uploadFileNames: [],
 };
 
 const host = API_SERVER_HOST;
@@ -50,15 +50,15 @@ const ItemBoardList = () => {
           <div
             key={item.id}
             className="item-card"
-            onClick={() => moveToRead(item.id)} // 상세 페이지 이동
+            onClick={() => navigate(`/itemBoard/read/${item.id}`)} // 상세 페이지 이동
           >
             <div className="item-image">
               {/* 이미지가 있으면 첫 번째 이미지, 없으면 기본 이미지 표시 */}
               <img
                 src={
                   item.uploadFileNames && item.uploadFileNames.length > 0
-                    ? `${host}/api/itemBoard/view/s_${item.uploadFileNames[0]}`
-                    : `${host}/api/itemBoard/view/default.jpg`
+                    ? `${host}/itemBoard/view/s_${item.uploadFileNames[0]}`
+                    : `${host}/itemBoard/view/default.jpg`
                 }
                 alt={item.title}
               />
