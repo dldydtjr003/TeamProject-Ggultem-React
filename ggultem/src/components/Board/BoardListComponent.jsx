@@ -88,20 +88,14 @@ const BoardList = () => {
 
                     <td className="td-title">
                       <div className="title-wrapper">
-                        {/*  썸네일 */}
-                        <td className="td-title">
-                          <div className="title-wrapper">
-                            {/* 이미지 있음 표시 */}
-                            {board.uploadFileNames &&
-                              board.uploadFileNames.length > 0 && (
-                                <span className="img-icon">📷</span>
-                              )}
 
-                            <span className="title-text">{board.title}</span>
-                          </div>
-                        </td>
+                        {/*  이미지 여부 표시 */}
+                        {board.content && board.content.includes("<img") && (
+                          <span className="img-icon">📷</span>
+                        )}
 
                         <span className="title-text">{board.title}</span>
+
                       </div>
                     </td>
 
