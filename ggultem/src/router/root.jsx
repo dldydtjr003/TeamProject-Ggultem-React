@@ -3,6 +3,8 @@ import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Loading from "../pages/Loading";
 import BoardRegisterPage from "../pages/Board/BoardRegisterPage";
+import AdminBoardListPage from "../pages/admin/Board/AdminBoardListPage";
+import AdminReplyListPage from "../pages/admin/Board/AdminReplyListPage";
 
 //* 관리자 페이지 */
 const AdminMain = lazy(() => import("../pages/admin/MainPage"));
@@ -72,6 +74,9 @@ const ItemBoardRead = lazy(
 const ItemBoardModify = lazy(
   () => import("../pages/ItemBoard/ItemBoardModifyPage"),
 );
+//* 장바구니 페이지 */
+const CartList = lazy(() => import("../pages/Cart/CartListPage"));
+
 const root = createBrowserRouter([
   /* ===== 관리자 영역 ===== */
   /* ===== 메인페이지 연결 영역 ===== */
@@ -140,6 +145,12 @@ const root = createBrowserRouter([
         <AdminBusinessMemberRead />
       </Suspense>
     ),
+  },
+  // 커뮤니티 관리자 영역
+  /* ===== 관리자 영역 ===== */
+  {
+    path: "/admin/board/list",
+    element: <AdminBoardListPage />,
   },
   // ✅ 관리자 공지사항
   {
@@ -298,6 +309,15 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <ItemBoardModify />
+      </Suspense>
+    ),
+  },
+  //* 장바구니 연결 영역 */
+  {
+    path: "/Cart/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <CartList />
       </Suspense>
     ),
   },
