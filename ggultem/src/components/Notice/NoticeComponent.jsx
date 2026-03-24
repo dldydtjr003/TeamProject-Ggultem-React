@@ -20,12 +20,19 @@ const initState = {
 const host = API_SERVER_HOST;
 
 const NoticeComponent = () => {
-  const { page, size, keyword, searchType, refresh, moveToBoardList } =
-    useCustomMove();
+  const {
+    page,
+    size,
+    keyword,
+    searchType,
+    refresh,
+    moveToNoticeList,
+    moveToNoticeRead,
+  } = useCustomMove();
   const [serverData, setServerData] = useState(initState);
 
   useEffect(() => {
-    getList({ page, size, keyword, searchType }).then((data) => {
+    getList({ page, size, keyword, searchType, refresh }).then((data) => {
       setServerData(data);
     });
   }, [page, size, keyword, searchType, refresh]);
@@ -64,8 +71,7 @@ const NoticeComponent = () => {
                   <tr
                     key={notice.noticeId}
                     className="board-row"
-                    // 나중에 상세페이지 연결
-                    // onClick={() => moveToNoticeRead(notice.noticeId)}
+                    onClick={() => moveToNoticeRead(notice.noticeId)}
                   >
                     <td className="td-no">{notice.noticeId}</td>
                     <td className="td-title">
@@ -96,7 +102,7 @@ const NoticeComponent = () => {
         </div>
 
         <div className="pagination-wrapper">
-          <PageComponent serverData={serverData} movePage={moveToBoardList} />
+          <PageComponent serverData={serverData} movePage={moveToNoticeList} />
         </div>
       </div>
     </div>

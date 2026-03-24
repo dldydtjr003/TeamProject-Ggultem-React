@@ -111,6 +111,44 @@ const useCustomMove = () => {
 
     setRefresh(!refresh);
   };
+  // ******************************* 사용자 Notice 영역 *************************************
+
+  // 1. 사용자용 공지사항 목록으로 이동
+  const moveToNoticeList = (pageParam) => {
+    let queryStr = "";
+
+    if (pageParam) {
+      // 파라미터가 있을 때 (페이징, 검색 조건 유지)
+      const pageNum = getNum(pageParam.page, page);
+      const sizeNum = getNum(pageParam.size, size);
+      const keywordStr = getString(pageParam.keyword, keyword);
+      const typeStr = getString(pageParam.searchType, searchType);
+
+      queryStr = createSearchParams({
+        page: pageNum,
+        size: sizeNum,
+        keyword: keywordStr,
+        searchType: typeStr,
+      }).toString();
+    } else {
+      // 파라미터가 없을 때 (기본값 사용)
+      queryStr = queryDefault;
+    }
+
+    navigate({
+      pathname: `../notice/list`, // '/admin'을 제거하고 상대 경로 혹은 절대 경로로 수정
+      search: queryStr,
+    });
+
+    setRefresh(!refresh);
+  };
+
+  // 2. 사용자용 공지사항 상세 조회 이동
+  const moveToNoticeRead = (noticeId) => {
+    navigate({
+      pathname: `../notice/read/${noticeId}`,
+    });
+  };
 
   //********************************** Admin Notice 영역 *************************************
 
@@ -226,6 +264,8 @@ const useCustomMove = () => {
     moveToAdminNoticeRead,
     moveToAdminNoticeModify,
     moveToAdminNoticeRegister,
+    moveToNoticeRead,
+    moveToNoticeList,
     moveToBusinessBoardList,
     moveToBusinessBoardRead,
     moveToBusinessBoardModify,

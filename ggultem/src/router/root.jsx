@@ -53,6 +53,7 @@ const BusinessList = lazy(() => import("../pages/Business/ListPage"));
 const BusinessRegister = lazy(() => import("../pages/Business/RegisterPage"));
 //* 공지사항 lazy */
 const NoticeList = lazy(() => import("../pages/Notice/NoticePage"));
+const NoticeRead = lazy(() => import("../pages/Notice/NoticeRead"));
 //* 커뮤니티 lazy */
 const BoardList = lazy(() => import("../pages/Board/BoardListPage"));
 const BoardRead = lazy(() => import("../pages/Board/BoardReadPage"));
@@ -180,17 +181,9 @@ const root = createBrowserRouter([
   },
   /* ===== 코드그룹 관리 (추가됨) ===== */
   {
-    path: "admin/codegroup",
-    element: (
-      <Suspense fallback={<LoadingPage />}>
-        <CodeGroupIndex />
-      </Suspense>
-    ),
-  },
-  {
     path: "admin/codegroup/list",
     element: (
-      <Suspense fallback={Loading}>
+      <Suspense fallback={<Loading />}>
         <CodeGroupList />
       </Suspense>
     ),
@@ -198,7 +191,7 @@ const root = createBrowserRouter([
   {
     path: "admin/codegroup/add",
     element: (
-      <Suspense fallback={Loading}>
+      <Suspense fallback={<Loading />}>
         <CodeGroupAdd />
       </Suspense>
     ),
@@ -206,7 +199,7 @@ const root = createBrowserRouter([
   {
     path: "admin/codegroup/read/:groupCode",
     element: (
-      <Suspense fallback={Loading}>
+      <Suspense fallback={<Loading />}>
         <CodeGroupRead />
       </Suspense>
     ),
@@ -214,7 +207,7 @@ const root = createBrowserRouter([
   {
     path: "admin/codegroup/modify/:groupCode",
     element: (
-      <Suspense fallback={Loading}>
+      <Suspense fallback={<Loading />}>
         <CodeGroupModify />
       </Suspense>
     ),
@@ -347,6 +340,15 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <NoticeList />
+      </Suspense>
+    ),
+  },
+  // READ
+  {
+    path: "/notice/read/:noticeId",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <NoticeRead />
       </Suspense>
     ),
   },
