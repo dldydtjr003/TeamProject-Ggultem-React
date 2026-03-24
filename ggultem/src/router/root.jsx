@@ -20,6 +20,18 @@ const AdminMemberRegister = lazy(
 const AdminBusinessMemberList = lazy(
   () => import("../pages/admin/Business/ListPage"),
 );
+const AdminBusinessMemberRead = lazy(
+  () => import("../pages/admin/Business/ReadPage"),
+);
+// ===== AdminNotice ===== */
+const NoticeListAdmin = lazy(() => import("../pages/admin/Notice/ListPage"));
+const NoticeRegisterAdmin = lazy(
+  () => import("../pages/admin/Notice/RegisterPage"),
+);
+const NoticeReadAdmin = lazy(() => import("../pages/admin/Notice/ReadPage"));
+const NoticeModifyAdmin = lazy(
+  () => import("../pages/admin/Notice/ModifyPage"),
+);
 
 //* 사용자 페이지 */
 const Main = lazy(() => import("../pages/MainPage"));
@@ -113,6 +125,52 @@ const root = createBrowserRouter([
         <AdminBusinessMemberList />
       </Suspense>
     ),
+  },
+  {
+    path: "/admin/businessmember/:email",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AdminBusinessMemberRead />
+      </Suspense>
+    ),
+  },
+  // ✅ 관리자 공지사항
+  {
+    path: "admin/notice",
+    children: [
+      {
+        path: "list",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <NoticeListAdmin />
+          </Suspense>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <NoticeRegisterAdmin />
+          </Suspense>
+        ),
+      },
+      {
+        path: "read/:noticeId",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <NoticeReadAdmin />
+          </Suspense>
+        ),
+      },
+      {
+        path: "modify/:noticeId",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <NoticeModifyAdmin />
+          </Suspense>
+        ),
+      },
+    ],
   },
   /* ===== 메인페이지 연결 영역 ===== */
   {

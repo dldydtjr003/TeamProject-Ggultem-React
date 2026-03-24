@@ -85,7 +85,13 @@ const ListComponent = () => {
             <tbody>
               {serverData.dtoList && serverData.dtoList.length > 0 ? (
                 serverData.dtoList.map((member) => (
-                  <tr key={member.email} className="businessmember-tr">
+                  <tr
+                    key={member.email}
+                    className="businessmember-tr"
+                    onClick={() =>
+                      navigate(`/admin/businessmember/${member.email}`)
+                    }
+                  >
                     <td className="businessmember-td-email">{member.email}</td>
                     <td>{member.nickname}</td>
                     <td className="company-td-name">
@@ -100,9 +106,9 @@ const ListComponent = () => {
                     <td className="businessmember-td-status">
                       {/* 활성화 여부에 따라 다른 스타일 적용 */}
                       <span
-                        className={`businessmember-status-dot ${member.enabled === 1 ? "active" : "inactive"}`}
+                        className={`businessmember-status-dot ${member.businessVerified === true ? "active" : "inactive"}`}
                       >
-                        {member.enabled === 1 ? "활성" : "비활성"}
+                        {member.businessVerified === true ? "활성" : "비활성"}
                       </span>
                     </td>
                   </tr>
