@@ -1,0 +1,106 @@
+/* 전체 배경 및 중앙 정렬 */
+.codegroup-add-wrapper {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.codegroup-add-container {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* 헤더 섹션 */
+.codegroup-header {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.codegroup-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.codegroup-title-point {
+  font-size: 2.6rem;
+  color: #ffc107; /* 꿀템 시그니처 옐로우 */
+  font-weight: 800;
+}
+
+/* 입력 폼 그룹 스타일 */
+.codegroup-form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.codegroup-form-group label {
+  width: 150px;
+  font-weight: 600;
+  color: #555;
+  font-size: 1rem;
+}
+
+/* 입력창 공통 스타일 */
+.codegroup-form-group input,
+.codegroup-form-group select {
+  flex: 1;
+  max-width: 500px;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.codegroup-form-group input:focus,
+.codegroup-form-group select:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.2);
+}
+
+/* 버튼 영역 */
+.codegroup-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.codegroup-btn {
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.codegroup-register-btn {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.codegroup-register-btn:hover {
+  background-color: #e6ae06;
+  transform: translateY(-2px);
+}
+
+.codegroup-cancle-btn {
+  background-color: #e0e0e0;
+  color: #666;
+}
+
+.codegroup-cancle-btn:hover {
+  background-color: #d0d0d0;
+}

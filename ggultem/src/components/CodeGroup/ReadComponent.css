@@ -1,0 +1,186 @@
+.codegroupinfo-wrapper {
+  padding: 20px;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.codegroupinfo-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+}
+
+/* 헤더 영역 */
+.codegroupinfo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f1f3f5;
+}
+
+.codegroupinfo-title {
+  font-size: 1.6rem;
+  color: #343a40;
+  margin: 0;
+}
+
+.codegroupinfo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.codegroupinfo-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.codegroupinfo-btn.modify {
+  background-color: #ffc107;
+  color: #333;
+}
+.codegroupinfo-btn.delete {
+  background-color: #1b0505;
+  color: #ffffff;
+}
+.codegroupinfo-btn.list {
+  background-color: #e9ecef;
+  color: #495057;
+}
+.codegroupinfo-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* 컨텐츠 레이아웃 */
+.codegroupinfo-content {
+  display: flex;
+  gap: 50px;
+}
+
+/* 프로필 이미지 영역 */
+.codegroupinfo-profile-section {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.codegroupinfo-image-box {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.codegroupinfo-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.codegroupinfo-no-image {
+  line-height: 180px;
+  text-align: center;
+  color: #adb5bd;
+}
+
+/* 상세 정보 리스트 */
+.codegroupinfo-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.codegroupinfo-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.codegroupinfo-row label {
+  width: 120px;
+  font-weight: 700;
+  color: #868e96;
+  font-size: 0.95rem;
+}
+
+.codegroupinfo-row span {
+  color: #212529;
+  font-size: 1.05rem;
+}
+
+.codegroupinfo-nickname {
+  font-weight: 800;
+  color: #ffc107 !important;
+}
+
+/* 배지 스타일 */
+.codegroupinfo-role-badge {
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #eee;
+}
+
+.codegroupinfo-role-badge.admin {
+  background: #343a40;
+  color: #fff;
+}
+.codegroupinfo-role-badge.user {
+  background: #e7f5ff;
+  color: #1971c2;
+}
+
+.codegroupinfo-status.active {
+  color: #2f9e44;
+  font-weight: bold;
+}
+.codegroupinfo-status.inactive {
+  color: #e03131;
+  font-weight: bold;
+}
+
+.codegroupinfo-social-tag {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+.codegroupinfo-social-tag.is-social {
+  background: #fee500;
+  color: #3c1e1e;
+}
+.codegroupinfo-social-tag.is-general {
+  background: #f1f3f5;
+  color: #868e96;
+}
+
+/* 정지 정보 강조 */
+.highlight-row {
+  background-color: #fff5f5;
+  padding: 15px !important;
+  border-radius: 8px;
+}
+.stop-text {
+  color: #e03131 !important;
+  font-weight: bold;
+}
+
+.codegroupinfo-loading {
+  padding: 100px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
+}

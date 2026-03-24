@@ -1,0 +1,85 @@
+/* 추가 폼 전체 컨테이너 */
+.detail-add-wrapper {
+  width: 1280px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 25px;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+}
+
+.detail-add-title {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+/* 입력 필드 그룹 레이아웃 */
+.detail-add-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.detail-add-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-add-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* 인풋 및 셀렉트 스타일 */
+.detail-add-input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.detail-add-input:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.2);
+}
+
+/* 등록 버튼 스타일 */
+.detail-add-btn {
+  padding: 10px 25px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-right: auto; /* 우측 정렬 */
+}
+
+.detail-add-btn:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 반응형: 화면이 좁아지면 세로로 정렬 */
+@media (max-width: 768px) {
+  .detail-add-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .detail-add-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

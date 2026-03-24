@@ -1,0 +1,105 @@
+/* 상세 코드 섹션 전체 컨테이너 */
+.detail-list-wrapper {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+/* 상단 타이틀 및 검색 영역 정렬 */
+.detail-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ffc107; /* 꿀템 옐로우 포인트 */
+}
+
+.detail-list-header h4 {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0;
+}
+
+/* 테이블 스타일 */
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.detail-table th {
+  background-color: #f8f9fa;
+  padding: 12px;
+  color: #555;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.detail-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* 수정 모드 인풋 스타일 */
+.detail-table input[type="text"],
+.detail-table input[type="number"],
+.detail-table select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ffc107; /* 수정 중임을 알리는 강조색 */
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.detail-table input:focus {
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+/* 버튼 스타일 통일 */
+.detail-btn {
+  padding: 6px 12px;
+  margin: 0 2px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+.btn-edit {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+.btn-delete {
+  background-color: #ffebee;
+  color: #c62828;
+}
+.btn-save {
+  background-color: #ffc107;
+  color: #333;
+}
+.btn-cancel {
+  background-color: #eee;
+  color: #666;
+}
+
+.detail-btn:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+/* 페이징 간격 */
+.detail-pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
