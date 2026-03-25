@@ -113,7 +113,7 @@ const useCustomMove = () => {
     }
 
     navigate({
-      pathname: "../blacklist/list",
+      pathname: "../admin/blacklist/list",
       search: queryStr,
     });
 
@@ -123,7 +123,7 @@ const useCustomMove = () => {
   // 2. 블랙리스트 등록 화면으로 이동
   const moveToAdd = () => {
     navigate({
-      pathname: "../blacklist/add",
+      pathname: "../admin/blacklist/add",
     });
   };
 
