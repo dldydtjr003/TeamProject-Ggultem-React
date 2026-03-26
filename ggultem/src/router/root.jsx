@@ -57,6 +57,9 @@ const AdminItemBoardRead = lazy(
 const AdminItemBoardRegister = lazy(
   () => import("../pages/admin/ItemBoard/AdminRegisterPage"),
 );
+const ItemBoardReply = lazy(
+  () => import("../pages/admin/ItemBoard/AdminReplyPage"),
+);
 // ✅ 블랙리스트 관리 페이지 (추가됨)
 const BlackListIndex = lazy(() => import("../pages/admin/BlackList/IndexPage"));
 const BlackListAdd = lazy(() => import("../pages/admin/BlackList/AddPage"));
@@ -212,7 +215,14 @@ const root = createBrowserRouter([
       </Suspense>
     ),
   },
-
+  {
+    path: "/admin/itemBoard/reply",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ItemBoardReply />
+      </Suspense>
+    ),
+  },
   // 커뮤니티 관리자 영역
   /* ===== 관리자 영역 ===== */
   {

@@ -4,6 +4,7 @@ import "./MainPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../include/Footer";
 import logoImg from "../../assets/logo.png";
+import AD from "../../include/business/AD";
 
 const MainPage = () => {
   const [keyword, setKeyword] = useState("");
@@ -39,6 +40,7 @@ const MainPage = () => {
             </Link>
           </div>
         </div>
+        <AD />
       </main>
 
       <Footer />
