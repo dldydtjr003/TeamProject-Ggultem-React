@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getMyInfo, API_SERVER_HOST } from "../../api/MemberApi";
-import "./MyPageComponent.css";
 import { useNavigate } from "react-router";
+import { getList } from "../../api/ItemBoardApi";
 import useCustomMove from "../../hooks/useCustomMove";
+import PageComponent from "../common/PageComponent";
+import "./MyPageComponent.css";
 
 const initState = {
   email: "",
@@ -22,18 +24,41 @@ const MyPageMain = ({ email }) => {
   const [member, setMember] = useState(initState);
   const navigate = useNavigate();
   const { moveToMyPageModify } = useCustomMove();
+  const [page, setPage] = useState(1);
+  const size = 5;
+  const [serverData, setServerData] = useState({
+    dtoList: [],
+    totalCount: 0,
+    pageNumList: [],
+    prev: false,
+    next: false,
+  });
+  const moveToList = (pageParam) => {
+    setPage(pageParam.page);
+  };
 
   useEffect(() => {
-    if (!email) {
-      console.error("이메일 값이 없어서 요청을 보낼 수 없습니다!");
-      return;
-    }
-    // 백엔드에서 데이터 가져오기
+    if (!email) return;
+
     getMyInfo(email).then((data) => {
       setMember(data);
     });
-  }, [email]);
 
+    const pageParam = {
+      page: page,
+      size: size,
+      searchType: "w",
+      email: email,
+    };
+
+    getList(pageParam)
+      .then((data) => {
+        if (data) {
+          setServerData(data);
+        }
+      })
+      .catch((err) => console.error("게시글 로드 실패:", err));
+  }, [email, page]); //
   if (!member)
     return (
       <div className="text-center mt-10">데이터를 불러오는 중입니다...</div>
@@ -59,8 +84,38 @@ const MyPageMain = ({ email }) => {
                 중고거래 등록하기
               </button>
             </div>
-            <div className="mp-empty-placeholder">
-              등록된 상품이 없습니다. 첫 상품을 올려보세요!
+            {serverData.dtoList && serverData.dtoList.length > 0 ? (
+              serverData.dtoList
+                .filter((item) => item.email === email) // ✅ 서버에서 온 email과 내 email이 같은 것만!
+                .map((item, cart) => (
+                  <div
+                    key={item.id}
+                    className="mp-item-card"
+                    onClick={() => navigate(`/itemBoard/read/${item.id}`)}
+                  >
+                    <img
+                      src={
+                        item.uploadFileNames && item.uploadFileNames.length > 0
+                          ? `${host}/itemBoard/view/s_${item.uploadFileNames[0]}`
+                          : `${host}/itemBoard/view/default.jpg`
+                      }
+                      alt="item"
+                    />
+                    <div className="mp-item-info">
+                      <span className="mp-item-title">{item.title}</span>
+                      <span className="mp-item-price">
+                        {item.price?.toLocaleString() || 0}원
+                      </span>
+                    </div>
+                  </div>
+                ))
+            ) : (
+              <div className="mp-empty-placeholder">
+                등록된 상품이 없습니다.
+              </div>
+            )}
+            <div className="mp-pagination-wrapper">
+              <PageComponent moveToList={moveToList} serverData={serverData} />
             </div>
           </section>
 
