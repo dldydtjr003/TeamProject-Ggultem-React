@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { getOne, deleteOne, API_SERVER_HOST } from "../../api/ItemBoardApi"; // deleteOne 추가 확인
+import { getOne, deleteOne, API_SERVER_HOST } from "../../api/ItemBoardApi";
+import { getListByGroup } from "../../api/admin/CodeDetailApi"; // 공통 코드 API 추가
 import useCustomLogin from "../../hooks/useCustomLogin";
 import ItemBoardReplyComponent from "./ItemBoardReplyComponent";
 import "./ItemBoardReadComponent.css";
 import { postAdd } from "../../api/CartApi";
+import axios from "axios";
 
 const host = API_SERVER_HOST;
 
@@ -15,63 +17,77 @@ const ItemBoardReadComponent = () => {
   const [item, setItem] = useState(null);
   const [fetching, setFetching] = useState(false);
 
+  // ✅ 공통 코드 저장을 위한 상태 추가
+  const [categories, setCategories] = useState([]);
+  const [locations, setLocations] = useState([]);
+
   useEffect(() => {
     if (id) {
+      // 1. 게시글 상세 정보 가져오기
       getOne(id)
         .then((data) => {
-          console.log("상세 데이터:", data);
           setItem(data);
           setFetching(false);
         })
         .catch((err) => {
           setFetching(false);
-          console.error("데이터 로딩 실패:", err);
-          alert("존재하지 않는 상품입니다.");
           navigate("/itemBoard/list");
+        });
+
+      // 2. 공통 코드 목록 가져오기 (카테고리, 지역 한글명을 찾기 위해)
+      const pageParam = { page: 1, size: 100 };
+      axios
+        .get(`${host}/api/codegroup/list`, { params: pageParam })
+        .then((res) => {
+          const allGroups = res.data.dtoList || [];
+          allGroups.forEach((group) => {
+            const gCode = group.groupCode.toUpperCase();
+            if (gCode.includes("ITEM_CATEGORY") || gCode.includes("ITEM_CAT")) {
+              getListByGroup(pageParam, group.groupCode).then((data) => {
+                if (data?.dtoList) setCategories(data.dtoList);
+              });
+            }
+            if (gCode.includes("ITEM_LOCATION") || gCode.includes("ITEM_LOC")) {
+              getListByGroup(pageParam, group.groupCode).then((data) => {
+                if (data?.dtoList) setLocations(data.dtoList);
+              });
+            }
+          });
         });
     }
   }, [id, navigate]);
 
-  // 삭제 함수
+  // ✅ 코드값을 한글명으로 변환하는 함수
+  const getCodeName = (codeList, codeValue) => {
+    const found = codeList.find((c) => c.codeValue === codeValue);
+    return found ? found.codeName : codeValue;
+  };
+
   const handleClickDelete = () => {
     if (window.confirm("정말로 이 상품을 삭제하시겠습니까?")) {
       setFetching(true);
-      deleteOne(id)
-        .then((data) => {
-          console.log("삭제 성공:", data);
-          setFetching(false);
-          alert("삭제되었습니다.");
-          navigate("/itemBoard/list");
-        })
-        .catch((err) => {
-          setFetching(false);
-          alert("삭제 중 오류가 발생했습니다.");
-        });
+      deleteOne(id).then(() => {
+        setFetching(false);
+        alert("삭제되었습니다.");
+        navigate("/itemBoard/list");
+      });
     }
+  };
+
+  const handleClickAddCart = () => {
+    const cartObj = { itemId: Number(id), email: loginState.email };
+    postAdd(cartObj).then(() => {
+      alert("장바구니 담기 성공!");
+      navigate("/cart/list");
+    });
   };
 
   if (fetching && !item)
     return <div className="loading">데이터를 불러오는 중...</div>;
   if (!item) return null;
 
-  //장바구니 담기
-  const handleClickAddCart = () => {
-    const cartObj = {
-      itemId: Number(id), // 숫자로 확실히 변환
-      email: loginState.email,
-    };
+  const isSoldOut = item.status === "판매완료" || item.status === "true";
 
-    console.log("전송 데이터:", cartObj); // 전송 직전 로그 확인
-
-    postAdd(cartObj)
-      .then((data) => {
-        alert("장바구니 담기 성공!");
-        navigate("/cart/list");
-      })
-      .catch((err) => {
-        console.error("에러 발생:", err.response); // 여기서 상세 에러 확인 가능
-      });
-  };
   return (
     <div className="read-container">
       <div className="read-header">
@@ -85,14 +101,13 @@ const ItemBoardReadComponent = () => {
       </div>
 
       <div className="read-content">
-        {/* 왼쪽: 이미지 섹션 */}
         <div className="image-section">
           {item.uploadFileNames && item.uploadFileNames.length > 0 ? (
             item.uploadFileNames.map((fileName, idx) => (
               <img
                 key={idx}
                 src={`${host}/itemBoard/view/${fileName}`}
-                alt={`product-${idx}`}
+                alt="product"
                 className="detail-img"
               />
             ))
@@ -105,22 +120,20 @@ const ItemBoardReadComponent = () => {
           )}
         </div>
 
-        {/* 오른쪽: 정보 상세 섹션 */}
         <div className="info-section">
           <div className="info-main">
-            <span className="info-category">{item.category}</span>
+            {/* ✅ 수정 포인트: 카테고리 코드를 한글명으로 변환 */}
+            <span className="info-category">
+              [{getCodeName(categories, item.category)}]
+            </span>
+
             <span
-              className={`status-badge ${item.status === "판매완료" ? "sold-out" : "on-sale"}`}
+              className={`status-badge ${isSoldOut ? "sold-out" : "on-sale"}`}
             >
-              {item.status === "판매완료" ? "판매 완료" : "판매 중"}
+              {isSoldOut ? "판매 완료" : "판매 중"}
             </span>
             <h1 className="info-title">{item.title}</h1>
             <h2 className="info-price">{item.price?.toLocaleString()}원</h2>
-          </div>
-
-          <div className="detail-row">
-            <span className="label">조회수</span>
-            <span className="value">{item.viewCount || 0}</span>
           </div>
 
           <div className="info-details">
@@ -132,7 +145,10 @@ const ItemBoardReadComponent = () => {
             </div>
             <div className="detail-row">
               <span className="label">거래지역</span>
-              <span className="value">{item.location}</span>
+              {/* ✅ 수정 포인트: 지역 코드를 한글명으로 변환 */}
+              <span className="value">
+                {getCodeName(locations, item.location)}
+              </span>
             </div>
             <div className="detail-row">
               <span className="label">등록일</span>
@@ -144,9 +160,9 @@ const ItemBoardReadComponent = () => {
             <span className="label">상품 설명</span>
             <p className="info-content">{item.content}</p>
           </div>
+
           <ItemBoardReplyComponent itemId={id} />
 
-          {/* 버튼 영역: 본인 확인 조건부 렌더링 */}
           <div className="read-footer-btns">
             {loginState.email === item.email ? (
               <div className="owner-btns">

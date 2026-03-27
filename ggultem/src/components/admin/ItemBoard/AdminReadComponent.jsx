@@ -43,7 +43,6 @@ const AdminReadComponent = () => {
           </div>
         </div>
 
-        {/* 메인 상단: 이미지와 상품 핵심 정보 */}
         <div className="product-main-section">
           <div className="image-area">
             <div className="img-holder">

@@ -2,6 +2,7 @@ import "./ItemBoardReadPage.css"; // CSS 파일 임포트
 import ItemBoardRead from "../../components/ItemBoard/ItemBoardReadComponent";
 import Header from "../../include/Header";
 import Footer from "../../include/Footer";
+import AD from "../../include/business/AD";
 
 const ItemBoardListPage = () => {
   return (
@@ -10,6 +11,7 @@ const ItemBoardListPage = () => {
       <main className="itemBoardRead-main-content">
         <ItemBoardRead />
       </main>
+      <AD />
       <Footer />
     </div>
   );
