@@ -41,7 +41,7 @@ const ChatListPage = () => {
   return (
     <div className="chat-list-container">
       <header className="chat-list-header">
-        <h2>나의 꿀템 채팅 🍯</h2>
+        <h2>나의 꿀템 채팅</h2>
       </header>
       
       <ul className="chat-room-list">

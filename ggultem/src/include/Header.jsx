@@ -37,7 +37,7 @@ export default function Header() {
     chatWindowRef.current = window.open(url, name, options);
   };
 
-    // 3. useEffect를 사용하여 전역 이벤트 등록 및 해제
+  // 3. useEffect를 사용하여 전역 이벤트 등록 및 해제
   useEffect(() => {
     const handleFocus = () => {
       // 팝업창이 존재하고 닫히지 않았다면 포커스를 줌
@@ -61,7 +61,10 @@ export default function Header() {
         {/* 로고 영역 */}
         <div className="header-nav-left">
           <Link to="/" className="header-nav-logo">
-            <img src={logoImg} alt="꿀템 로고" className="header-logo-img" />
+            {/* 이미지 대신 텍스트 로고로 변경 */}
+            <span className="header-logo-text">
+              <span className="logo-g">G</span>꿀템
+            </span>
           </Link>
         </div>
 
@@ -86,9 +89,9 @@ export default function Header() {
 
         <div className="header-nav-right">
           {loginState && loginState.email ? (
-            
+
             <div className="header-user-menu">
-                            <Link to={`/chatroom/list`} className="nav-item">
+              <Link to={`/chatroom/list`} className="nav-item">
                 Chat
               </Link>
 

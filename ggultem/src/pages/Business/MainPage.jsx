@@ -24,17 +24,30 @@ const MainPage = () => {
 
       <main className="content-area">
         <div className="hero-section">
-          <img src={logoImg} alt="꿀템 로고" className="header-logo-img" />
-          <h2>꿀템 비즈니스 센터</h2>
+          <div className="business-banner-container">
+            {/* 👈 왼쪽: 홍보 문구 영역 */}
+            <div className="business-text-section">
+              <h2 className="business-title">꿀템 이용자, 당신의 고객이 되다!</h2>
+              <p className="business-subtitle">
+                당신의 상품을 알릴 꿀같은 선택<br /> 지금 확인하세요.
+              </p>
+            </div>
 
-          {/* 하단 버튼형 메뉴 */}
-          <div className="content-wrapper-wide">
-            <Link to="/business/register" className="content-card-wide">
-              <div className="content-box">비즈니스 회원 등록</div>
-            </Link>
-            <Link to="/business/list" className="content-card-wide">
-              <div className="content-box">비즈니스 센터 이동</div>
-            </Link>
+            {/* 👉 오른쪽: 버튼 세로 정렬 영역 */}
+            <div className="business-button-section">
+              <Link to="/business/register" className="business-btn-card">
+                <div className="btn-content">
+                  <span className="btn-icon">📝</span>
+                  <span className="btn-text">비즈니스 회원 등록</span>
+                </div>
+              </Link>
+              <Link to="/business/list" className="business-btn-card">
+                <div className="btn-content">
+                  <span className="btn-icon">🚀</span>
+                  <span className="btn-text">비즈니스 센터 이동</span>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
         <AD />

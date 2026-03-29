@@ -31,7 +31,7 @@ export default function ADSection() {
   return (
     <div className="AD-section-container compact-ad-section">
       <div className="AD-section-header">
-        <h2 className="AD-section-title">꿀템 파트너스 파워링크 🍯</h2>
+        <h2 className="AD-section-title">꿀템 파트너스 파워링크</h2>
         <span className="AD-badge">AD</span>
       </div>
 
