@@ -23,15 +23,18 @@ export default function Header() {
       <nav className="business-header-nav-container">
         {/* 로고 영역 */}
         <div className="business-header-nav-left">
-          <Link to="/" className="business-header-nav-logo">
-            <img src={logoImg} alt="꿀템 로고" className="header-logo-img" />
+          <Link to="/business/list" className="business-header-nav-logo">
+            {/* 이미지 대신 텍스트 로고로 변경 */}
+            <span className="business-header-logo-text">
+              <span className="business-logo-g">G</span>꿀템
+            </span>
           </Link>
         </div>
 
         {/* 메뉴 영역 */}
         <div className="business-header-nav-center">
           <Link
-            to="/business/manage"
+            to="/business/board/list"
             className="business-header-nav-link business"
           >
             상품관리
@@ -43,8 +46,11 @@ export default function Header() {
 
         <div className="business-header-nav-right">
           <div className="business-header-user-menu">
-            <Link to={`/mypage`} className="business-header-user-nickname">
-              🍯 {loginState.nickname}님
+            <Link
+              to={`/business/list`}
+              className="business-header-user-nickname"
+            >
+              MyPage
             </Link>
             <button
               onClick={handleLogout}

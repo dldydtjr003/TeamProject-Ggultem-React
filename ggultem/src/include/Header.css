@@ -1,124 +1,175 @@
-/* Header.css */
-
+/* 1. 헤더 기본 레이아웃 */
 .header-custom-header {
-  width: 1920px;
+  width: 100%;
   height: 80px;
   background-color: #ffffff;
-  border-bottom: 2px solid #f1f1f1;
+  border-bottom: 1px solid #f0f0f0;
   display: flex;
-  align-items: center;
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 15px rgba(63, 46, 27, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .header-nav-container {
   width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
-  padding: 0 5%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 }
 
-/* 로고 스타일 */
-.header-nav-logo {
-  text-decoration: none;
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--bee-brown);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* 2. 왼쪽 로고 영역 */
+.header-nav-left {
+  flex: 0 0 auto;
 }
 
-.header-logo-icon {
-  font-size: 32px;
-}
 
-/* 메뉴 스타일 */
+/* 3. 중앙 메뉴 영역 */
 .header-nav-center {
   display: flex;
-  gap: 40px;
+  gap: 35px;
+  flex: 1;
+  justify-content: center;
 }
 
 .header-nav-link {
   text-decoration: none;
-  font-size: 18px;
+  color: #333;
   font-weight: 700;
-  color: var(--bee-brown);
-  padding: 10px 15px;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  transition: color 0.2s;
 }
 
 .header-nav-link:hover {
-  color: var(--honey-color);
-  background-color: var(--soft-yellow);
+  color: #FF8C00; /* 꿀템 오렌지 */
 }
 
-/* 우측 버튼 (로그인 등) */
-.header-nav-auth-btn.login {
+/* 4. 오른쪽 유저 메뉴 영역 (여기가 핵심!) */
+.header-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-user-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 💬 Chat 버튼 (알약 모양) */
+.nav-item {
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--bee-brown);
-  background-color: var(--soft-yellow);
-  padding: 10px 25px;
-  border-radius: 50px;
-  border: 2px solid var(--honey-color);
-  transition: 0.3s;
-}
-
-.header-nav-auth-btn:hover {
-  background-color: var(--honey-color);
+  background-color: #1a1a1a; /* T1 다크 */
   color: #fff;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.2s;
 }
 
-/* 로고 이미지 스타일 */
-.header-logo-img {
-  height: 70px; /* 헤더 높이(80px)에 맞춰 적절히 조절 */
-  width: auto;  /* 가로세로 비율 유지 */
-  display: block;
-  transition: transform 0.3s ease;
+.nav-item:hover {
+  background-color: #FF8C00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
 }
 
-.header-nav-logo:hover .header-logo-img {
-  transform: scale(1.05); /* 마우스 올렸을 때 살짝 커지는 효과 */
+/* 🍯 마이페이지 */
+.header-user-nickname {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
 }
 
-/* 기존 nav-logo의 flex 설정 유지 */
+.header-user-nickname:hover {
+  background-color: #fff9f0;
+  color: #FF8C00;
+}
+
+/* 🚪 로그인/로그아웃 버튼 공통 */
+.header-nav-auth-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.login {
+  background-color: #FF8C00;
+  color: white;
+}
+
+.login:hover {
+  background-color: #e67e00;
+}
+
+.logout {
+  background: none;
+  border: 1px solid #ddd;
+  color: #888;
+}
+
+.logout:hover {
+  border-color: #E2012D; /* T1 레드 포인트 */
+  color: #E2012D;
+  background-color: #fff5f5;
+}
+
+/* 반응형: 화면이 좁아지면 중앙 메뉴 숨기기 (필요시) */
+@media (max-width: 900px) {
+  .header-nav-center {
+    display: none;
+  }
+}
+
+/* 전체 로고 텍스트 스타일 */
+.header-logo-text {
+  font-family: 'Pretendard', 'Nanum Square Round', sans-serif; /* 둥근 폰트가 없다면 나눔스퀘어라운드 추천! */
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #333;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 'G' 부분에 포인트 주기 (둥글둥글한 박스) */
+.logo-g {
+  background-color: #ffb700; /* 카톡 노란색 또는 꿀색 */
+  color: #3f2e1b;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px; /* 둥글둥글한 모서리 */
+  font-size: 1.6rem;
+  margin-right: 2px;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+/* 마우스 올렸을 때 효과 */
+.header-nav-logo:hover .logo-g {
+  transform: rotate(0deg) scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
 .header-nav-logo {
   text-decoration: none;
-  display: flex;
-  align-items: center;
 }
-.header-user-menu {
-  width: 250px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.header-user-nickname {
-  width: 60%;
-  font-weight: 800;
-  color: var(--bee-brown);
-  font-size: 14px;
-}
-
-.header-nav-auth-btn.logout {
-  width: 30%;
-  height: 30px;
-  background-color: #f1f1f1;
-  border-color: #ddd;
-  font-size: 12px;
-  padding: 0px;
-}
-
-.header-nav-auth-btn.logout:hover {
-  background-color: var(--bee-brown);
-  color: var(--honey-color);
+.header-nav-logo:hover {
+  text-decoration: none;
 }

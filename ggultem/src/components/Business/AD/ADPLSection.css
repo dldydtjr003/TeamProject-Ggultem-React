@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 40px 0;
 }
 
 .AD-compact-item {
@@ -81,14 +81,12 @@
 /* 파워링크 전용 비어있을 때 컨테이너 */
 .ADPL-empty-container {
   width: 100%;
-  padding: 50px 0;
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fafafa; /* 아주 옅은 배경색으로 영역 구분 */
-  border-radius: 8px;
+  padding: 60px 20px;
+  background-color: #fcfcfc;
+  border: 1px dashed #ddd; /* 점선 테두리로 허전함 방지 */
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .ADPL-empty-content {

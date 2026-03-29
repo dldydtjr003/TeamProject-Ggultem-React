@@ -22,18 +22,17 @@ const MainPage = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="mainpage-container">
       <Header />
 
-      <main className="content-area">
-        <div className="hero-section">
-          <img src={logoImg} alt="꿀템 로고" className="header-logo-img" />
+      <main className="mainpage-content-area">
+        <div className="mainpage-hero-section">
           <h2>달콤한 득템, 꿀템!</h2>
 
           {/* ✅ 와이드 검색창 + 카테고리 선택 */}
-          <form className="search-form-wide" onSubmit={handleSearch}>
+          <form className="mainpage-search-form-wide" onSubmit={handleSearch}>
             <select
-              className="search-type-select"
+              className="mainpage-search-type-select"
               value={searchType}
               onChange={(e) => setSearchType(e.target.value)}
             >
@@ -44,30 +43,37 @@ const MainPage = () => {
 
             <input
               type="text"
-              className="search-input-wide"
+              className="mainpage-search-input-wide"
               placeholder="동네에서 꿀템을 검색해보세요!"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />
-            <button type="submit" className="search-btn-wide">
-              🍯검색
+            <button type="submit" className="mainpage-search-btn-wide">
+              검색
             </button>
           </form>
         </div>
 
         {/* 하단 버튼형 메뉴 */}
-        <div className="content-wrapper-wide">
-          <Link to="/itemBoard/list" className="content-card-wide">
-            <div className="content-box">중고거래</div>
+        <div className="mainpage-content-wrapper-wide">
+          <Link to="/itemBoard/list" className="mainpage-content-card-wide">
+            <div className="mainpage-icon-box">📦</div> {/* 아이콘 자리 */}
+            <div className="mainpage-content-box">중고거래</div>
           </Link>
-          <Link to="/report" className="content-card-wide">
-            <div className="content-box">사기조회</div>
+
+          <Link to="/report" className="mainpage-content-card-wide">
+            <div className="mainpage-icon-box">🔍</div>
+            <div className="mainpage-content-box">사기조회</div>
           </Link>
-          <Link to="/board/list" className="content-card-wide">
-            <div className="content-box">커뮤니티</div>
+
+          <Link to="/board/list" className="mainpage-content-card-wide">
+            <div className="mainpage-icon-box">💬</div>
+            <div className="mainpage-content-box">커뮤니티</div>
           </Link>
-          <Link to="/notice/list" className="content-card-wide">
-            <div className="content-box">공지사항</div>
+
+          <Link to="/notice/list" className="mainpage-content-card-wide">
+            <div className="mainpage-icon-box">📢</div>
+            <div className="mainpage-content-box">공지사항</div>
           </Link>
         </div>
         <AD />
