@@ -24,7 +24,10 @@ export default function Header() {
         {/* 로고 영역 */}
         <div className="business-header-nav-left">
           <Link to="/business/list" className="business-header-nav-logo">
-            <img src={logoImg} alt="꿀템 로고" className="header-logo-img" />
+            {/* 이미지 대신 텍스트 로고로 변경 */}
+            <span className="business-header-logo-text">
+              <span className="business-logo-g">G</span>꿀템
+            </span>
           </Link>
         </div>
 
@@ -47,7 +50,7 @@ export default function Header() {
               to={`/business/list`}
               className="business-header-user-nickname"
             >
-              🍯마이페이지
+              MyPage
             </Link>
             <button
               onClick={handleLogout}

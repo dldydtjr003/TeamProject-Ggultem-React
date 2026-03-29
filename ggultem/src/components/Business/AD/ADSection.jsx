@@ -30,7 +30,7 @@ export default function ADSection() {
   return (
     <div className="AD-section-container">
       <div className="AD-section-header">
-        <h2 className="AD-section-title">오늘의 추천 꿀템 🍯</h2>
+        <h2 className="AD-section-title">오늘의 추천 꿀템</h2>
         <span className="AD-badge">AD</span>
       </div>
 

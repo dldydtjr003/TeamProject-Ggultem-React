@@ -80,7 +80,7 @@ const ChatComponent = ({ roomId }) => {
 
   return (
     <div className="chat-container">
-      <header className="chat-header"><h2>1:1 메시지 🍯</h2></header>
+      <header className="chat-header"><h2>1:1 메시지</h2></header>
       <div className="message-area" ref={scrollRef}>
         <ul className="message-list">
           {messages.map((msg, index) => {
