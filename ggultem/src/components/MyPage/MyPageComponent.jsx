@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getMyInfo, API_SERVER_HOST } from "../../api/MemberApi";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { getList as getItemList } from "../../api/ItemBoardApi";
-import { getList as getCartList } from "../../api/CartApi";
 import useCustomMove from "../../hooks/useCustomMove";
 import PageComponent from "../common/PageComponent";
 import "./MyPageComponent.css";
+import axios from "axios";
 
 const initState = {
   email: "",
@@ -24,8 +24,10 @@ const host = API_SERVER_HOST;
 const MyPageMain = ({ email }) => {
   const [member, setMember] = useState(initState);
   const navigate = useNavigate();
+  const location = useLocation();
   const { moveToMyPageModify } = useCustomMove();
-  const [page, setPage] = useState(1);
+  const [itemPage, setItemPage] = useState(1); // 상품용 페이지
+  const [cartPage, setCartPage] = useState(1); // 장바구니용 페이지
   const size = 5;
   const [serverData, setServerData] = useState({
     dtoList: [],
@@ -42,36 +44,52 @@ const MyPageMain = ({ email }) => {
     prev: false,
     next: false,
   });
-  const moveToList = (pageParam) => {
-    setPage(pageParam.page);
-  };
 
-  useEffect(() => {
+  const getAllData = () => {
     if (!email) return;
 
-    getMyInfo(email).then((data) => {
-      setMember(data);
+    // 회원 정보 로드
+    getMyInfo(email).then((data) => setMember(data));
+
+    // 내 상품 리스트 로드
+    getItemList({ page: itemPage, size: size, email: email }).then((data) => {
+      if (data) setServerData(data);
     });
 
-    const pageParam = {
-      page: page,
-      size: size,
-      searchType: "w",
-      email: email,
-    };
-    getCartList(pageParam).then((data) => {
-      if (data) {
-        setCartData(data);
-      }
-    });
-    getItemList(pageParam)
-      .then((data) => {
-        if (data) {
-          setServerData(data);
-        }
+    // 장바구니 리스트 로드
+    axios
+      .get(`${host}/cart/list`, {
+        params: { page: cartPage, size: size, email: email },
       })
-      .catch((err) => console.error("게시글 로드 실패:", err));
-  }, [email, page]); //
+      .then((res) => {
+        setCartData(res.data);
+      });
+  };
+
+  // 2. 통합 useEffect
+  useEffect(() => {
+    getAllData();
+
+    // ✨ 핵심: CartList에서 보낸 { refresh: true } 신호가 있으면 데이터를 다시 부름
+    if (location.state?.refresh) {
+      getAllData();
+
+      // 사용한 신호는 비워줌 (다시 들어왔을 때 무한 리프레시 방지)
+      window.history.replaceState({}, document.title);
+    }
+
+    // location.key를 넣어 페이지 이동(뒤로가기 포함) 시 매번 체크하도록 설정
+  }, [email, itemPage, cartPage, location.key, location.state]);
+
+  const moveItemPage = (pageParam) => {
+    setItemPage(pageParam.page);
+  };
+
+  // 장바구니 페이지 변경 (필요할 경우)
+  const moveCartPage = (pageParam) => {
+    setCartPage(pageParam.page);
+  };
+
   if (!member)
     return (
       <div className="text-center mt-10">데이터를 불러오는 중입니다...</div>
@@ -99,7 +117,7 @@ const MyPageMain = ({ email }) => {
             </div>
             {serverData.dtoList && serverData.dtoList.length > 0 ? (
               serverData.dtoList
-                .filter((item) => item.email === email) // ✅ 서버에서 온 email과 내 email이 같은 것만!
+                .filter((item) => item.email === email)
                 .map((item) => (
                   <div
                     key={item.id}
@@ -119,7 +137,9 @@ const MyPageMain = ({ email }) => {
                       <span className="mp-item-price">
                         {item.price?.toLocaleString() || 0}원
                       </span>
-                      <span className="mp-item-title">{item.regDate}</span>
+                      <span className="mp-item-date">
+                        추가한 날짜: {item.regDate?.substring(0, 10)}
+                      </span>
                     </div>
                   </div>
                 ))
@@ -129,7 +149,10 @@ const MyPageMain = ({ email }) => {
               </div>
             )}
             <div className="mp-pagination-wrapper">
-              <PageComponent moveToList={moveToList} serverData={serverData} />
+              <PageComponent
+                moveToList={moveItemPage}
+                serverData={serverData}
+              />
             </div>
           </section>
 
@@ -148,23 +171,31 @@ const MyPageMain = ({ email }) => {
                 <div
                   key={item.id}
                   className="mp-item-card"
-                  onClick={() => navigate(`/cart/read/${item.id}`)}
+                  onClick={() =>
+                    navigate(`/itemBoard/read/${item.itemBoard.id}`)
+                  }
                 >
                   <img
                     src={
-                      item.uploadFileNames?.[0]
-                        ? `${host}/itemBoard/view/s_${item.uploadFileNames[0]}`
-                        : `${host}/itemBoard/view/default.jpg`
+                      item.itemBoard.itemList &&
+                      item.itemBoard.itemList.length > 0
+                        ? `${host}/itemBoard/view/s_${item.itemBoard.itemList[0].fileName}`
+                        : item.itemBoard.uploadFileNames &&
+                            item.itemBoard.uploadFileNames.length > 0
+                          ? `${host}/itemBoard/view/s_${item.itemBoard.uploadFileNames[0]}`
+                          : `${host}/itemBoard/view/default.jpg`
                     }
                     alt="cart-item"
                   />
                   <div className="mp-item-info">
-                    <span className="mp-item-title">{item.title}</span>
+                    <span className="mp-item-title">
+                      {item.itemBoard.title}
+                    </span>
                     <span className="mp-item-price">
-                      {item.price?.toLocaleString() || 0}원
+                      {item.itemBoard.price?.toLocaleString() || 0}원
                     </span>
                     <span className="mp-item-date">
-                      담은 날짜: {item.regDate?.substring(0, 10)}
+                      담은 날짜: {item.itemBoard.regDate?.substring(0, 10)}
                     </span>
                   </div>
                 </div>
@@ -174,6 +205,9 @@ const MyPageMain = ({ email }) => {
                 장바구니가 비어 있습니다.
               </div>
             )}
+            <div className="mp-pagination-wrapper">
+              <PageComponent moveToList={moveCartPage} serverData={cartData} />
+            </div>
           </section>
         </div>
 

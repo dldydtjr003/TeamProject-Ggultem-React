@@ -42,7 +42,7 @@ const CartList = () => {
       .then((data) => {
         if (data && data.dtoList) {
           // enabled가 0인 데이터(정상)만 필터링 (사용자님 로직 유지)
-          const activeItems = data.dtoList.filter((item) => item.enabled === 0);
+          const activeItems = data.dtoList.filter((item) => item.enabled === 1);
           setServerData({
             ...data,
             dtoList: activeItems,
@@ -115,7 +115,7 @@ const CartList = () => {
     deleteOne(id)
       .then(() => {
         alert("삭제되었습니다.");
-        fetchCartList();
+        navigate("/mypage", { state: { refresh: true } });
       })
       .catch(() => alert("삭제 중 오류가 발생했습니다."));
   };
@@ -130,7 +130,7 @@ const CartList = () => {
       await Promise.all(deletePromises);
       alert("선택한 상품이 모두 삭제되었습니다.");
       setCheckedItems([]);
-      fetchCartList();
+      navigate("/mypage", { state: { refresh: true } });
     } catch (error) {
       alert("일부 상품 삭제에 실패했습니다.");
     }
