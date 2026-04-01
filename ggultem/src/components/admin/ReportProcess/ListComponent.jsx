@@ -7,12 +7,10 @@ const ListComponent = () => {
   const [serverData, setServerData] = useState({
     dtoList: [],
     totalCount: 0,
-    // ... 나머지 페이징 정보 초기값
   });
 
   useEffect(() => {
     getReportList({ page, size }).then((data) => {
-      // 데이터가 null로 넘어올 경우를 대비한 방어 코드
       if (data) {
         setServerData(data);
       }
@@ -48,22 +46,13 @@ const ListComponent = () => {
                   height: "50px",
                 }}
               >
-                {/* 1. 번호: 이건 DTO 최상위에 있어서 그대로 둡니다. */}
                 <td>{report.reportId}</td>
-
-                {/* 2. 유형: reportDTO 주머니 안에서 꺼내야 합니다. */}
-                <td>{report.reportDTO?.reportType || "유형 없음"}</td>
-
-                {/* 3. 대상자: reportDTO 주머니 안에서 꺼내야 합니다. */}
-                <td>{report.reportDTO?.targetMemberId || "대상 없음"}</td>
-
-                {/* 4. 상태: reportStatus 필드를 사용합니다. */}
-                <td>{report.reportStatus}</td>
-
-                {/* 5. 신고일: reportDTO 안의 regDate를 사용합니다. */}
+                <td>{report.reportType || "유형 없음"}</td>
+                <td>{report.targetMemberId || "대상 없음"}</td>
+                <td>{report.status === 0 ? "접수" : "처리완료"}</td>
                 <td>
-                  {report.reportDTO?.regDate
-                    ? new Date(report.reportDTO.regDate).toLocaleDateString()
+                  {report.regDate
+                    ? new Date(report.regDate).toLocaleDateString()
                     : "날짜 정보 없음"}
                 </td>
               </tr>
@@ -77,7 +66,6 @@ const ListComponent = () => {
           )}
         </tbody>
       </table>
-      {/* 페이징 컴포넌트 위치 */}
     </div>
   );
 };

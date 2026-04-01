@@ -2,12 +2,13 @@
 // 차후 다른 컴퍼넌트의 구조와 다른 것에 대해 혼동을 방지하기 위한 주석.
 // 공지사항은 일반적인 CRUD 형태이고, Report쪽은 WorkFlow 중심이라 구조가 다를 수밖에 없음.
 import { useState } from "react";
-import { useSelector } from "react-redux"; // ✅ 추가
+import { useSelector } from "react-redux";
 import { completeReportProcess } from "../../../api/admin/ReportApi";
 
-const ProcessComponent = ({ reportId }) => {
-  const loginState = useSelector((state) => state.loginSlice); // ✅ 추가
-  const adminEmail = loginState.email; // ✅ 하드코딩 제거
+const ProcessComponent = ({ reportId, onComplete }) => {
+  // ✅ onComplete 추가
+  const loginState = useSelector((state) => state.loginSlice);
+  const adminEmail = loginState.email;
 
   const [processData, setProcessData] = useState({
     actionNote: "",
@@ -22,7 +23,7 @@ const ProcessComponent = ({ reportId }) => {
 
     const finalData = {
       reportId: Number(reportId),
-      adminEmail: String(adminEmail), // ✅ 실제 로그인한 관리자 이메일
+      adminEmail: String(adminEmail),
       actionNote: String(processData.actionNote),
       reportStatus: "처리완료",
       memberStatus: Number(processData.memberStatus),
@@ -34,6 +35,7 @@ const ProcessComponent = ({ reportId }) => {
       .then((data) => {
         console.log("서버 응답:", data);
         alert("신고 처리가 완료되었습니다.");
+        onComplete(); // ✅ 추가
       })
       .catch((err) => {
         console.error("Axios 에러 상세:", err.response?.data);

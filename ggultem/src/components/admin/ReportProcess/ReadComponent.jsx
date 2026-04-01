@@ -11,16 +11,23 @@ const ReadComponent = ({ reportId }) => {
     getOneReport(reportId).then((data) => {
       console.log(data);
       setReport(data);
-    });
-    getReportProcess(reportId).then((data) => {
-      console.log(data);
-      setProcessed(data);
+
+      // ✅ 처리완료(status=1)일 때만 processed 조회
+      if (data.status === 1) {
+        getReportProcess(reportId)
+          .then((processedData) => {
+            console.log(processedData);
+            setProcessed(processedData);
+          })
+          .catch((err) => {
+            console.error("처리 내역 조회 실패:", err);
+          });
+      }
     });
   }, [reportId]);
 
   if (!report) return <div>로딩 중...</div>;
 
-  // ✅ report 자체가 ReportDTO이므로 reportDetail 없이 바로 접근
   return (
     <div className="report-read-container">
       <h2>신고 상세 확인</h2>
@@ -63,15 +70,19 @@ const ReadComponent = ({ reportId }) => {
       <hr />
 
       {report.status === 0 ? (
-        <ProcessComponent reportId={reportId} />
+        // ✅ 처리 완료 후 reload로 상태 갱신
+        <ProcessComponent
+          reportId={reportId}
+          onComplete={() => window.location.reload()}
+        />
       ) : (
         <div className="processed-info">
           <h4>처리 완료된 신고입니다.</h4>
           <p>
-            <strong>관리자 메모:</strong> {processed.actionNote}
+            <strong>관리자 메모:</strong> {processed?.actionNote || "없음"}
           </p>
           <p>
-            <strong>처리 담당자:</strong> {processed.adminEmail}
+            <strong>처리 담당자:</strong> {processed?.adminEmail}
           </p>
         </div>
       )}
