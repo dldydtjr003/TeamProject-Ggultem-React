@@ -58,12 +58,12 @@ const AdminBoardListComponent = () => {
     loadData();
   };
 
-  // ⭐ 관리자 삭제 (최종)
+  //  관리자 삭제 (최종)
   const handleDelete = async (boardNo) => {
     if (!window.confirm("정말 삭제 하시겠습니까?")) return;
 
     try {
-      await deleteBoard(boardNo, token); // ⭐ 여기 중요
+      await deleteBoard(boardNo, token);
       alert("삭제 완료");
       loadData();
     } catch (err) {

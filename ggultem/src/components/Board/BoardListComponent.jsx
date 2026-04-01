@@ -26,7 +26,7 @@ const BoardList = () => {
   const [serverData, setServerData] = useState(initState);
   const navigate = useNavigate();
 
-  // 🔥 검색 상태
+  //  검색 상태
   const [localKeyword, setLocalKeyword] = useState(keyword || "");
   const [localType, setLocalType] = useState(searchType || "all");
 
@@ -73,7 +73,7 @@ const BoardList = () => {
             유용한 정보와 일상을 공유하는 공간입니다.
           </p>
 
-          {/* 🔥 검색 */}
+          {/*  검색 */}
           <form className="search-form" onSubmit={handleSearch}>
             <select
               value={localType}
@@ -94,7 +94,7 @@ const BoardList = () => {
             <button type="submit">검색</button>
           </form>
 
-          {/* 액션 */}
+
           <div className="board-actions">
             <span className="total-count">
               전체 게시글 {serverData.totalCount}개
@@ -137,7 +137,8 @@ const BoardList = () => {
                         {board.content && board.content.includes("<img") && (
                           <span className="img-icon">📷</span>
                         )}
-                        <span className="title-text">{board.title}</span>
+                        <span>{board.title}</span>
+                        <span>💬 {board.replyCount}</span>
                       </div>
                     </td>
 
