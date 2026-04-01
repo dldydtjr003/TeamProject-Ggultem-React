@@ -1,0 +1,120 @@
+/* FraudSearch.css */
+.fraud-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: "Pretendard", sans-serif;
+}
+
+/* 검색바 영역 */
+.fraud-search-bar {
+  display: flex;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-color: #fff;
+}
+
+.fraud-search-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.fraud-search-btn {
+  padding: 0 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.fraud-search-btn:hover {
+  background-color: #555;
+}
+
+/* 결과 카드 공통 */
+.fraud-result-card {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border: 2px solid #eee;
+}
+
+/* 위험 상태 (Danger) */
+.fraud-result-card.danger {
+  border: 3px solid #e03131; /* 이미지의 붉은 테두리 강조 */
+}
+
+.icon-danger {
+  font-size: 60px;
+  color: #e03131;
+  margin-bottom: 15px;
+}
+.title-danger {
+  color: #e03131;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+/* 정상 상태 (Safe) */
+.icon-safe {
+  font-size: 60px;
+  color: #40c057;
+  margin-bottom: 15px;
+}
+.title-safe {
+  color: #333;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+/* 정보 테이블 */
+.fraud-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-top: 2px solid #333;
+}
+
+.fraud-table th {
+  background-color: #f8f9fa;
+  color: #555;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+  width: 30%;
+  font-size: 14px;
+}
+
+.fraud-table td {
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.status-active {
+  color: #e03131;
+  font-weight: bold;
+}
+.status-normal {
+  color: #40c057;
+  font-weight: bold;
+}
+
+.placeholder-text {
+  color: #adb5bd;
+  padding: 60px 0;
+  font-size: 15px;
+}
