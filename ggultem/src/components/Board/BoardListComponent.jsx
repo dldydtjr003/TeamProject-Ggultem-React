@@ -46,7 +46,7 @@ const BoardList = () => {
     setLocalKeyword("");
   };
 
-  // 🔥 데이터 조회
+  //  데이터 조회
   useEffect(() => {
 
     const cleanKeyword = keyword?.trim();

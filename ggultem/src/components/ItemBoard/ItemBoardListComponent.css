@@ -1,5 +1,5 @@
 /* 전체 감싸는 영역: 너비 제한 해제 */
-.board-list-full-wrapper {
+.itemboard-list-full-wrapper {
   width: 100vw; /* 100% 대신 브라우저 전체 너비 사용 */
   margin: 0;
   padding: 0; /* 부모 패딩을 0으로 만들어야 지도가 끝까지 붙음 */
@@ -9,7 +9,7 @@
 }
 
 /* 상단 헤더: 적절한 너비 유지 */
-.board-header-fixed {
+.itemboard-header-fixed {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,21 +18,10 @@
   padding: 30px 40px;
 }
 
-.board-header-fixed h2 {
+.itemboard-header-fixed h2 {
   font-size: 28px;
   font-weight: 800;
   color: #333;
-}
-
-.write-btn {
-  background-color: #ff8a3d;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
 }
 
 /* 검색바 영역 */
@@ -122,6 +111,6 @@
 }
 
 /* 지도와 리스트가 들어가는 섹션 */
-.map-content-section {
+.itemboard-map-content-section {
   width: 100%;
 }
