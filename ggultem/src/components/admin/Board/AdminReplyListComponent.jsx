@@ -22,13 +22,13 @@ const AdminReplyListComponent = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
 
-  // 🔥 데이터 로딩
+  //  데이터 로딩
   const loadData = () => {
     const params = {
       page,
       size: 10,
 
-      // 🔥 핵심 수정
+      //  핵심 수정
       enabled: enabled === "" ? null : Number(enabled),
       keyword: keyword.trim() === "" ? null : keyword.trim(),
     };
@@ -48,18 +48,18 @@ const AdminReplyListComponent = () => {
     });
   };
 
-  // 🔥 페이지 변경 시 호출
+  //  페이지 변경 시 호출
   useEffect(() => {
     loadData();
   }, [page]);
 
-  // 🔥 검색 (페이지 초기화)
+  //  검색 (페이지 초기화)
   const handleSearch = () => {
     setPage(1);
     loadData();
   };
 
-  // 🔥 삭제
+  //  삭제
   const handleDelete = async (replyNo) => {
     if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
 
@@ -104,14 +104,14 @@ const AdminReplyListComponent = () => {
         <button onClick={handleSearch}>검색</button>
       </div>
 
-      {/* 🔥 데이터 없을 때 */}
+      {/*  데이터 없을 때 */}
       {serverData.dtoList.length === 0 && (
         <div style={{ marginTop: "20px", color: "#888" }}>
           조회된 댓글이 없습니다.
         </div>
       )}
 
-      {/* 🔥 리스트 */}
+      {/*  리스트 */}
       {serverData.dtoList.map((reply) => (
         <div
           key={reply.replyNo}
@@ -138,7 +138,7 @@ const AdminReplyListComponent = () => {
         </div>
       ))}
 
-      {/* 🔥 페이징 */}
+      {/*  페이징 */}
       {serverData.pageNumList.length > 0 && (
         <div className="pagination">
 

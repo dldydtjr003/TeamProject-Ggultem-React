@@ -18,7 +18,7 @@ const BoardRegisterComponent = () => {
   const handleRegister = () => {
 
     const content = editorRef.current.getInstance().getHTML();
-    console.log("🔥 email:", email);
+    console.log(" email:", email);
 
     if (!email) {
       alert("로그인이 필요합니다");
