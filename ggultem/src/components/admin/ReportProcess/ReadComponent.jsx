@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import { getOneReport, getReportProcess } from "../../../api/admin/ReportApi";
 import { API_SERVER_HOST } from "../../../api/config";
 import ProcessComponent from "./ProcessComponent";
+import { useNavigate } from "react-router-dom"; // ✅ 추가
 
 const ReadComponent = ({ reportId }) => {
   const [report, setReport] = useState(null);
   const [processed, setProcessed] = useState(null);
+  const navigate = useNavigate(); // ✅ 추가
 
   useEffect(() => {
     getOneReport(reportId).then((data) => {
       console.log(data);
       setReport(data);
 
-      // ✅ 처리완료(status=1)일 때만 processed 조회
       if (data.status === 1) {
         getReportProcess(reportId)
           .then((processedData) => {
@@ -46,7 +47,6 @@ const ReadComponent = ({ reportId }) => {
           <strong>신고자:</strong> {report.memberEmail}
         </p>
       </div>
-
       <div className="report-evidence">
         <label>증거 첨부 이미지</label>
         <div className="image-list">
@@ -66,11 +66,12 @@ const ReadComponent = ({ reportId }) => {
             ))}
         </div>
       </div>
-
       <hr />
-
+      <button onClick={() => navigate("/admin/report/list")}>
+        목록으로
+      </button>{" "}
+      {/* ✅ 추가 */}
       {report.status === 0 ? (
-        // ✅ 처리 완료 후 reload로 상태 갱신
         <ProcessComponent
           reportId={reportId}
           onComplete={() => window.location.reload()}
