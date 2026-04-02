@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./FraudSearchComponent.css";
+import "./FraudSearchComponent.css"; // 🚩 파일명이 맞는지 꼭 확인하세요!
 import { getList } from "../../api/admin/BlackListApi";
 
 const FraudSearch = () => {
@@ -15,7 +15,7 @@ const FraudSearch = () => {
     const keyword = normalize(rawInput);
 
     if (!keyword) {
-      alert("이메일을 정확히 입력해주세요.");
+      alert("이메일을 정확히 입력해주세요. 🐝");
       return;
     }
 
@@ -28,21 +28,14 @@ const FraudSearch = () => {
         page: 1,
         size: 10,
         searchType: "e",
-        keyword: rawInput, // 서버는 그대로 보내고
+        keyword: rawInput,
       });
 
       const now = new Date();
-
-      // 🔥 1. 서버 결과를 무조건 배열로 안전 처리
       const list = Array.isArray(data?.dtoList) ? data.dtoList : [];
-
-      // 🔥 2. 완전 일치 강제 (여기서 99% 차단됨)
-      const exactMatches = list.filter((item) => {
-        const email = normalize(item?.email);
-        return email === keyword;
-      });
-
-      // ❗ 여기서 걸러지면 끝 → "a" 입력 시 무조건 빈 배열
+      const exactMatches = list.filter(
+        (item) => normalize(item?.email) === keyword,
+      );
 
       if (exactMatches.length === 0) {
         setSearchResult(null);
@@ -50,10 +43,8 @@ const FraudSearch = () => {
         return;
       }
 
-      // 🔥 3. 상태 + 기간 체크
       const validUser = exactMatches.find((item) => {
         const isExpired = item.endDate && new Date(item.endDate) < now;
-
         return item.status === "Y" && !isExpired;
       });
 
@@ -69,7 +60,7 @@ const FraudSearch = () => {
 
   return (
     <div className="fraud-container">
-      {/* 검색바 */}
+      {/* ✅ 1. 검색바 영역 (부드러운 라운드 스타일) */}
       <div className="fraud-search-bar">
         <input
           ref={inputRef}
@@ -83,17 +74,19 @@ const FraudSearch = () => {
           onClick={handleSearch}
           disabled={loading}
         >
-          {loading ? "..." : "🔍"}
+          {loading ? "..." : "검색"}
         </button>
       </div>
 
-      {/* 결과 */}
+      {/* ✅ 2. 결과 카드 (위험 시 danger 클래스 추가) */}
       <div className={`fraud-result-card ${searchResult ? "danger" : ""}`}>
         {!hasSearched ? (
           <div className="placeholder-text">
-            이메일을 입력하고 검색해주세요.
+            검색창에 이메일을 입력하고 <br />
+            <b>안전한 꿀템 거래</b>를 시작하세요! 🍯
           </div>
         ) : searchResult ? (
+          /* 위험 결과 */
           <div className="danger-content">
             <div className="icon-danger">⚠️</div>
             <h2 className="title-danger">블랙리스트 등록 사용자입니다.</h2>
@@ -105,30 +98,28 @@ const FraudSearch = () => {
                 </tr>
                 <tr>
                   <th>사유</th>
-                  <td>{searchResult.reason}</td>
+                  <td className="status-active">{searchResult.reason}</td>
                 </tr>
                 <tr>
-                  <th>시작일</th>
-                  <td>{searchResult.startDate?.split("T")[0]}</td>
-                </tr>
-                <tr>
-                  <th>종료일</th>
+                  <th>기간</th>
                   <td>
+                    {searchResult.startDate?.split("T")[0]} ~
                     {searchResult.endDate
                       ? searchResult.endDate.split("T")[0]
-                      : "영구"}
+                      : " 영구"}
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         ) : (
+          /* 안전 결과 */
           <div className="safe-content">
             <div className="icon-safe">🛡️</div>
-            <h2 className="title-safe">일치하는 블랙리스트 정보가 없습니다.</h2>
-            <p>
-              "<b>{inputRef.current?.value}</b>" 와(과) 정확히 일치하는 이메일이
-              없습니다.
+            <h2 className="title-safe">안심하고 거래하셔도 좋습니다!</h2>
+            <p className="safe-desc">
+              "<b>{inputRef.current?.value}</b>" 님은 <br />
+              현재 블랙리스트에 등록되어 있지 않습니다.
             </p>
           </div>
         )}

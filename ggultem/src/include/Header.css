@@ -63,7 +63,7 @@
 /* 💬 Chat 버튼 (알약 모양) */
 .nav-item {
   text-decoration: none;
-  background-color: #1a1a1a; /* T1 다크 */
+  background-color: #ffc107; /* T1 다크 */
   color: #fff;
   padding: 8px 18px;
   border-radius: 30px;

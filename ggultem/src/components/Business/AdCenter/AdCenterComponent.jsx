@@ -138,11 +138,11 @@ const AdCenterComponent = () => {
 
       {/* 중간 정산 섹션 (간략하게) */}
       <section className="biz-stats-container">
-        <div className="stats-summary">
+        <div className="biz-stats-summary">
           {/* 1. 상단 큰 카드 */}
-          <div className="stats-card">
+          <div className="biz-stats-card">
             <h4>All DashBoard</h4>
-            <div className="info-wrapper">
+            <div className="biz-info-wrapper">
               <p>
                 <span>누적 광고비</span>{" "}
                 <strong>{totalSpend.toLocaleString()}원</strong>
@@ -155,16 +155,16 @@ const AdCenterComponent = () => {
           </div>
 
           {/* 2. 하단 작은 카드 2개 묶음 */}
-          <div className="stats-summary-2">
-            <div className="stats-card">
+          <div className="biz-stats-summary-2">
+            <div className="biz-stats-card">
               <h4>Today Spend</h4>
-              <div className="info-wrapper">
+              <div className="biz-info-wrapper">
                 <strong>{todaySpend.toLocaleString()}원</strong>
               </div>
             </div>
-            <div className="stats-card">
+            <div className="biz-stats-card">
               <h4>Today Click</h4>
-              <div className="info-wrapper">
+              <div className="biz-info-wrapper">
                 <strong>{todayClick.toLocaleString()}회</strong>
               </div>
             </div>
@@ -176,7 +176,7 @@ const AdCenterComponent = () => {
       <div className="history-table-container">
         <div className="table-header">
           <h4>비즈머니 이용 상세 내역</h4>
-          <span className="total-count">전체 {myHistory.length}건</span>
+          <span className="total-count">전체 {myHistory.dtoList.length}건</span>
         </div>
 
         <form className="codegroup-search-form" onSubmit={handleSearch}>

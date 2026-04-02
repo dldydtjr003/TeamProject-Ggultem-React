@@ -147,14 +147,14 @@
 }
 
 /* 🧱 카드 배치 영역 */
-.stats-summary {
+.biz-stats-summary {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
 /* 📊 하단 2개 카드를 감싸는 영역 (Grid 적용) */
-.stats-summary-2 {
+.biz-stats-summary-2 {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 1:1 비율로 나란히 */
   gap: 20px;
@@ -162,7 +162,7 @@
 }
 
 /* ✨ 공통 카드 스타일 */
-.stats-card {
+.biz-stats-card {
   background: #fff;
   border: 1px solid #f0f0f0;
   border-radius: 20px;
@@ -173,12 +173,12 @@
   overflow: hidden;
 }
 
-.stats-card:hover {
+.biz-stats-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.stats-card h4 {
+.biz-stats-card h4 {
   margin: 0 0 20px 0;
   font-size: 15px;
   color: #888; /* 제목은 약간 연하게 */
@@ -190,26 +190,26 @@
 }
 
 /* 🎨 상단 All DashBoard 포인트 컬러 */
-.stats-summary > .stats-card > h4 { border-left-color: #ffb700; } 
+.biz-stats-summary > .biz-stats-card > h4 { border-left-color: #ffb700; } 
 /* 🎨 하단 Today Spend 포인트 컬러 */
-.stats-summary-2 > .stats-card:nth-child(1) h4 { border-left-color: #ff8c00; } 
+.biz-stats-summary-2 > .biz-stats-card:nth-child(1) h4 { border-left-color: #ff8c00; } 
 /* 🎨 하단 Today Click 포인트 컬러 */
-.stats-summary-2 > .stats-card:nth-child(2) h4 { border-left-color: #ff8c00; }
+.biz-stats-summary-2 > .biz-stats-card:nth-child(2) h4 { border-left-color: #ff8c00; }
 
 /* 텍스트 및 숫자 정렬 */
-.info-wrapper {
+.biz-info-wrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.info-wrapper span {
+.biz-info-wrapper span {
   font-size: 14px;
   color: #666;
   font-weight: 500;
 }
 
-.info-wrapper strong {
+.biz-info-wrapper strong {
   font-size: 26px; /* 숫자 강조 */
   font-weight: 900;
   color: #222;
@@ -217,7 +217,7 @@
 }
 
 /* 상단 큰 카드 내부에서 가로로 배치하고 싶을 때 */
-.stats-summary > .stats-card .info-wrapper {
+.biz-stats-summary > .biz-stats-card .biz-info-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 누적 광고비와 누적 클릭수를 가로로 */
 }
@@ -233,7 +233,6 @@
 
 .admin-search {
   padding: 8px 12px;
-  border: 1px solid #ddd;
   border-radius: 5px;
   outline: none;
   font-size: 0.9rem;
@@ -243,12 +242,21 @@
   flex: 1;
   min-width: 200px;
   padding: 8px 12px; 
-  border: 1px solid #ddd;
+  border: 1px solid #ffb700;
   border-radius: 5px;
 }
 
+.codegroup-actions input[type="text"]:focus-within {
+  border-color: #ffb700 !important; 
+  transition: all 0.3s ease;
+}
+
+.codegroup-actions input:focus {
+  outline: none;
+}
+
 .search-btn-wide {
-  background-color: #c7ae4c;
+  background-color: #ffb700;
   color: white;
   border: none;
   padding: 8px 20px;
@@ -259,7 +267,7 @@
 }
 
 .search-btn-wide:hover {
-  background-color: #473900;
+  background-color: #c18f0f;
 }
 
 .admin-btn-group {

@@ -47,7 +47,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #4a90e2;
+  border-color: #ffb700;
 }
 
 .read-only-input {
@@ -128,7 +128,7 @@
 .submit-btn {
   width: 100%;
   padding: 15px;
-  background-color: #4a90e2;
+  background-color: #ffb700;
   color: white;
   border: none;
   border-radius: 8px;
@@ -140,7 +140,7 @@
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: #357abd;
+  background-color: #b0820d;
 }
 
 .submit-btn:disabled {

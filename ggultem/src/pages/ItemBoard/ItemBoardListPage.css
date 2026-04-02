@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* 화면 전체 높이 확보 */
-  background-color: #f9f9f9; /* 연한 회색 배경으로 깔끔하게 */
 }
 
 /* 메인 컨텐츠 영역 */

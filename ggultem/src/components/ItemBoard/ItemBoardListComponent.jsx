@@ -75,25 +75,28 @@ const ItemBoardList = () => {
         <h2>우리동네 꿀템목록</h2>
       </div>
 
-      <div className="itemboard-search-area-center">
-        <form className="itemboard-search-form-wide" onSubmit={handleSearch}>
+      {/* 검색 영역을 감싸는 중앙 정렬 컨테이너 */}
+      <div className="search-area-center">
+        <form className="search-form-wide" onSubmit={handleSearch}>
           <select
             id="itemSearchType"
             className="search-type-select"
-            defaultValue={searchType} // searchState 대신 defaultValue 사용
+            defaultValue={searchType}
           >
             <option value="all">전체조건</option>
             <option value="title">상품명</option>
             <option value="content">내용</option>
           </select>
+
           <input
             type="text"
             id="itemSearchKeyword"
             className="search-input-wide"
             placeholder="어떤 꿀템을 찾으시나요?"
-            defaultValue={""} // 초기값 비움
+            defaultValue={""}
           />
-          <button type="submit" className="itemboard-search-btn-wide">
+
+          <button type="submit" className="search-btn-wide">
             검색
           </button>
         </form>

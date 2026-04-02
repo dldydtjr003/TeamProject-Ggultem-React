@@ -19,7 +19,6 @@ const initState = {
 };
 
 const BoardList = () => {
-
   const { page, size, keyword, searchType, refresh, moveToBoardList } =
     useCustomMove();
 
@@ -55,7 +54,6 @@ const BoardList = () => {
 
   //  데이터 조회 (핵심)
   useEffect(() => {
-
     const cleanKeyword = keyword?.trim();
 
     getList({
@@ -66,22 +64,20 @@ const BoardList = () => {
     }).then((data) => {
       setServerData(data);
     });
-
   }, [page, size, keyword, searchType, refresh]);
 
   return (
     <div className="board-list-wrapper">
       <div className="board-list-container">
-
         {/* 헤더 */}
         <div className="board-header">
-          <h2 className="board-title">🍯 꿀템 커뮤니티</h2>
+          <h2 className="board-title">꿀템 커뮤니티</h2>
           <p className="board-subtitle">
             유용한 정보와 일상을 공유하는 공간입니다.
           </p>
 
           {/* 검색 */}
-          <form className="search-form" onSubmit={handleSearch}>
+          <form className="search-form-container" onSubmit={handleSearch}>
             <select
               value={localType}
               onChange={(e) => setLocalType(e.target.value)}
@@ -111,7 +107,7 @@ const BoardList = () => {
               className="write-btn"
               onClick={() => navigate("/board/register")}
             >
-              새 글 쓰기 ✍️
+              새 글 쓰기
             </button>
           </div>
         </div>
@@ -175,7 +171,6 @@ const BoardList = () => {
         <div className="pagination-wrapper">
           <PageComponent serverData={serverData} movePage={moveToBoardList} />
         </div>
-
       </div>
     </div>
   );

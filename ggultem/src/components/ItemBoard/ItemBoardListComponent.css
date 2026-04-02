@@ -13,14 +13,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 30px 40px;
 }
 
 .itemboard-header-fixed h2 {
-  font-size: 28px;
+  font-size: 32px; /* 크게 강조 */
   font-weight: 800;
+  margin-bottom: 10px;
   color: #333;
 }
 
@@ -31,7 +32,6 @@
   justify-content: center;
   align-items: center;
   padding: 30px 0;
-  background-color: #f9f9f9; /* 연한 배경색으로 검색창 강조 */
   margin-bottom: 20px;
 }
 

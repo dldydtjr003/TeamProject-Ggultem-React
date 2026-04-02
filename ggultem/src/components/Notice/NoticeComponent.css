@@ -1,6 +1,6 @@
 /* 전체 배경 및 래퍼 */
 .board-list-wrapper {
-  width: 1480px;
+  width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 60px 20px;
@@ -10,16 +10,31 @@
 
 /* 게시판 컨테이너: 시원하게 너비 확보 */
 .board-list-container {
-  width: 1280px;
+  width: 1200px;
   background: white;
   padding: 50px;
   border-radius: 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
-/* 상단 헤더 섹션 */
+/* =========================
+   헤더 영역 (중앙 정렬)
+========================= */
 .board-header {
-  margin-bottom: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.board-title {
+  font-size: 32px; /* 크게 강조 */
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.board-subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 25px;
 }
 
 .board-title {

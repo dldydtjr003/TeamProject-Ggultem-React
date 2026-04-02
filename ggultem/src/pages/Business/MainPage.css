@@ -3,89 +3,110 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 95%; /* 조금 더 넓게 */
   max-width: 1200px;
-  margin: 60px auto;
-  padding: 60px;
-  background-color: var(--soft-yellow); /* 연한 노란색 배경 */
-  border-radius: 40px;
-  box-shadow: 0 20px 40px rgba(63, 46, 27, 0.05);
-  gap: 50px;
+  margin: 80px auto;
+  padding: 60px 80px; /* 좌우 여백 확보 */
+  background: linear-gradient(135deg, #FFFBEB 0%, #FFF3C4 100%); /* 단색보다 풍부한 꿀 색상 */
+  border-radius: 50px; /* 더 둥글게 해서 귀여운 느낌 */
+  box-shadow: 0 25px 50px rgba(255, 183, 0, 0.1); /* 황금빛 그림자 */
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 배경에 은은한 벌집 패턴이나 장식 (선택사항) */
+.business-banner-container::before {
+  content: '🍯';
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 120px;
+  opacity: 0.1;
+  transform: rotate(-15deg);
 }
 
 /* ✅ 왼쪽 텍스트 영역 */
 .business-text-section {
-  flex: 1.2;
-  text-align: left; /* 문구 왼쪽 정렬 */
+  flex: 1.3;
+  text-align: left;
+  z-index: 2;
 }
 
 .business-title {
-  font-size: 42px !important; /* 기존 h2보다 조금 작게 조정 */
-  color: var(--bee-brown);
-  line-height: 1.3;
-  margin-bottom: 20px !important;
-  word-break: keep-all;
+  font-size: 46px !important; /* 가독성 위해 살짝 키움 */
+  color: #3F2E1B; /* 진한 벌꿀 갈색 */
+  line-height: 1.25;
+  margin-bottom: 24px !important;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
 
 .business-subtitle {
-  font-size: 20px;
-  color: #666;
+  font-size: 22px;
+  color: #5C4B37;
   line-height: 1.6;
-  margin: 0;
-  font-weight: 500;
+  font-weight: 600;
+  opacity: 0.8;
 }
 
 /* ✅ 오른쪽 버튼 영역 (세로 정렬) */
 .business-button-section {
-  flex: 0.8;
+  flex: 0.7;
   display: flex;
-  flex-direction: column; /* 세로 정렬 핵심! */
-  gap: 20px;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 2;
 }
 
-/* ✅ 버튼 카드 스타일 */
+/* ✅ 버튼 카드 스타일 (꿀템 시그니처) */
 .business-btn-card {
   text-decoration: none;
   background-color: #ffffff;
-  padding: 25px 40px;
-  border-radius: 20px;
-  border: 2px solid transparent;
+  padding: 22px 35px;
+  border-radius: 25px; /* 버튼도 둥글게 */
+  border: 3px solid transparent; /* 테두리 두께 강조 */
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  justify-content: center; /* 버튼 내부 중앙 정렬 */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 통통 튀는 느낌 */
+  box-shadow: 0 10px 20px rgba(63, 46, 27, 0.08);
 }
 
 .btn-content {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .btn-icon {
-  font-size: 24px;
+  font-size: 28px; /* 아이콘 강조 */
 }
 
 .btn-text {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
-  color: var(--bee-brown);
+  color: #3F2E1B;
 }
 
-/* ✅ 호버 효과 */
+/* ✅ 호버 효과 (왼쪽으로 슥 나오는 느낌 + 테두리 꿀색) */
 .business-btn-card:hover {
-  transform: translateX(-10px); /* 왼쪽으로 살짝 튀어나오는 느낌 */
-  border-color: var(--honey-color);
-  box-shadow: 0 12px 25px rgba(255, 183, 0, 0.2);
+  transform: scale(1.05) translateX(-15px); /* 크기도 살짝 키우면서 왼쪽으로 */
+  border-color: #FFB700;
+  background-color: #FFFDF0;
+  box-shadow: 0 15px 30px rgba(255, 183, 0, 0.25);
 }
 
-/* 반응형 처리: 화면이 작아지면 다시 세로로 */
-@media (max-width: 900px) {
+/* 반응형 처리 */
+@media (max-width: 1024px) {
   .business-banner-container {
     flex-direction: column;
     text-align: center;
-    padding: 40px;
+    padding: 50px 30px;
+    margin: 40px auto;
   }
   .business-text-section { text-align: center; }
-  .business-title { font-size: 32px !important; }
+  .business-title { font-size: 36px !important; }
+  .business-button-section { width: 100%; max-width: 400px; }
+  .business-btn-card:hover { transform: translateY(-10px); } /* 모바일은 위로 튀어나오게 */
 }

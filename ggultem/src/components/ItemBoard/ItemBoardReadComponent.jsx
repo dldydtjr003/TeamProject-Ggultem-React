@@ -120,7 +120,6 @@ const ItemBoardReadComponent = () => {
         >
           ← 목록으로
         </button>
-        <h2>상품 상세 정보</h2>
       </div>
 
       <div className="read-content">
@@ -203,34 +202,33 @@ const ItemBoardReadComponent = () => {
             <span className="label">상품 설명</span>
             <p className="info-content">{item.content}</p>
           </div>
-
-          <ItemBoardReplyComponent itemId={id} />
-
-          <div className="read-footer-btns">
-            {loginState.email === item.email ? (
-              <div className="owner-btns">
-                <button
-                  className="edit-btn"
-                  onClick={() => navigate(`/itemBoard/modify/${id}`)}
-                >
-                  수정하기
-                </button>
-                <button className="delete-btn" onClick={handleClickDelete}>
-                  삭제하기
-                </button>
-              </div>
-            ) : (
-              <>
-                <button className="chat-btn" onClick={handleClickAddChat}>
-                  판매자와 채팅하기
-                </button>
-                <button className="chat-btn" onClick={handleClickAddCart}>
-                  장바구니 담기
-                </button>
-              </>
-            )}
-          </div>
         </div>
+      </div>
+      <ItemBoardReplyComponent itemId={id} />
+
+      <div className="read-footer-btns">
+        {loginState.email === item.email ? (
+          <div className="owner-btns">
+            <button
+              className="edit-btn"
+              onClick={() => navigate(`/itemBoard/modify/${id}`)}
+            >
+              수정하기
+            </button>
+            <button className="delete-btn" onClick={handleClickDelete}>
+              삭제하기
+            </button>
+          </div>
+        ) : (
+          <>
+            <button className="chat-btn" onClick={handleClickAddChat}>
+              판매자와 채팅하기
+            </button>
+            <button className="chat-btn" onClick={handleClickAddCart}>
+              장바구니 담기
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

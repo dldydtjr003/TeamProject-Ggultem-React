@@ -59,8 +59,7 @@
 
 .business-form-group input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  border-color: #ffb700;
 }
 
 /* ✨ 읽기 전용(Readonly) 스타일 */
@@ -96,6 +95,18 @@
   border: none;
 }
 
+.business-verified-btn {
+  flex: 1;
+  padding: 7px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
 .business-btn-cancel {
   background-color: #f1f3f5;
   color: #495057;
@@ -105,13 +116,22 @@
   background-color: #e9ecef;
 }
 
+.business-verified-btn {
+  background-color: #ffb700;
+  color: #fff;
+}
+
+.business-verified-btn:hover {
+  background-color: #bc8700;
+}
+
 .business-btn-submit {
-  background-color: #007bff;
+  background-color: #ffb700;
   color: #ffffff;
 }
 
 .business-btn-submit:hover {
-  background-color: #0056b3;
+  background-color: #bc8700;
   transform: translateY(-1px);
 }
 

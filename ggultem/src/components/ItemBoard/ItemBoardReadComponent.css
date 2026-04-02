@@ -1,7 +1,7 @@
 /* 상세 페이지 전체 컨테이너 */
 .read-container {
-  max-width: 1100px;
-  margin: 40px auto;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 20px;
   font-family:
     "Pretendard",
@@ -13,24 +13,36 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .back-btn {
-  background: none;
-  border: none;
-  color: #666;
-  font-size: 1rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  
+  background-color: #FFFCEB; /* 연한 꿀색 배경 */
+  border: 1px solid #FFD700; /* 꿀템 시그니처 테두리 */
+  color: #3F2E1B; /* 벌꿀 갈색 텍스트 */
+  margin-top: 10px;
+  font-size: 15px; /* 시인성 확보 */
+  font-weight: 700;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 8px 16px;
+  border-radius: 12px; /* 둥글둥글하고 귀여운 곡선 */
+  
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 쫀득한 움직임 */
 }
 
 .back-btn:hover {
-  background: #f1f3f5;
-  color: #222;
+  background-color: #FFD700; /* 호버 시 전체가 황금빛으로! */
+  color: #3F2E1B;
+  transform: translateY(-2px); /* 살짝 떠오르는 느낌 */
+}
+
+.back-btn:active {
+  transform: translateY(2px); /* 눌렀을 때 쫀득하게 눌림 */
+  box-shadow: 0 1px 0px #FFD700;
 }
 
 .read-header h2 {
@@ -44,9 +56,8 @@
   display: flex;
   gap: 40px;
   background: #fff;
-  padding: 40px;
+  padding: 20px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   border: 1px solid #f1f3f5;
 }
 
@@ -257,10 +268,22 @@
 .chat-btn:nth-child(1) {
   background: #343a40;
   color: #fff;
+  transition: 0.5s;
 }
 .chat-btn:nth-child(2) {
-  background: #ffc107;
-  color: #222;
+  background: #ffb700;
+  color: #fff;
+  transition: 0.5s;
+}
+.chat-btn:nth-child(1):hover {
+  background: #1b1c1d;
+  color: #fff;
+   transform: color;
+}
+.chat-btn:nth-child(2):hover {
+  background: #ba890f;
+  color: #fff;
+  transform: color;
 }
 
 @media (max-width: 900px) {

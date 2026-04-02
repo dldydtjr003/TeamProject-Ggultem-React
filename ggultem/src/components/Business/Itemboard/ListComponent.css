@@ -40,6 +40,15 @@
   border-radius: 5px;
 }
 
+.codegroup-actions input[type="text"]:focus-within {
+  border-color: #ffb700 !important; 
+  transition: all 0.3s ease;
+}
+
+.codegroup-actions input:focus {
+  outline: none;
+}
+
 .search-btn-wide {
   background-color: #c7ae4c;
   color: white;

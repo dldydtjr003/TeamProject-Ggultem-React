@@ -112,13 +112,13 @@ const DataComponent = () => {
     (statsData.totalPowerShoppingCount || 0);
 
   return (
-    <div className="biz-list-wrapper">
+    <div className="data-list-wrapper">
       {/* 📈 상단 통계 대시보드 */}
-      <section className="biz-stats-container">
-        <div className="stats-summary">
-          <div className="stats-card">
+      <section className="data-stats-container">
+        <div className="data-stats-summary">
+          <div className="data-stats-card">
             <h4>All DashBoard</h4>
-            <div className="info-wrapper">
+            <div className="data-info-wrapper">
               <p>
                 {/* 서버에서 받아온 전체 통계(statsData)를 사용하세요 */}총
                 클릭수: <span>{totalClicks.toLocaleString()}</span>
@@ -128,10 +128,10 @@ const DataComponent = () => {
               </p>
             </div>
           </div>
-          <div className="stats-summary-2">
-            <div className="stats-card">
+          <div className="data-stats-summary-2">
+            <div className="data-stats-card">
               <h4>파워쇼핑 DashBoard</h4>
-              <div className="info-wrapper">
+              <div className="data-info-wrapper">
                 <p>
                   총 클릭수:{" "}
                   <span>
@@ -144,9 +144,9 @@ const DataComponent = () => {
                 </p>
               </div>
             </div>
-            <div className="stats-card">
+            <div className="data-stats-card">
               <h4>파워링크 DashBoard</h4>
-              <div className="info-wrapper">
+              <div className="data-info-wrapper">
                 <p>
                   {/* 서버에서 받아온 전체 통계(statsData)를 사용하세요 */}총
                   클릭수:{" "}

@@ -2,13 +2,12 @@
    전체 배경 & 중앙 정렬
 ========================= */
 .board-list-wrapper {
-  background: #f9f9f9; /* 전체 배경 */
   min-height: 100vh; /* 화면 꽉 채우기 */
   padding: 40px 0;
 }
 
 .board-list-container {
-  max-width: 1100px; /* 중앙 컨텐츠 폭 */
+  max-width: 1200px; /* 중앙 컨텐츠 폭 */
   margin: 0 auto;
 }
 
@@ -31,56 +30,6 @@
   font-size: 14px;
   color: #888;
   margin-bottom: 25px;
-}
-
-/* =========================
-   검색창 (핵심 디자인 ⭐)
-========================= */
-.search-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  border: 2px solid #f5a623; /* 꿀템 느낌 색상 */
-  border-radius: 50px; /* 둥글게 */
-  padding: 8px 12px;
-
-  background: white;
-  max-width: 600px;
-  margin: 0 auto 20px;
-}
-
-/* select 스타일 */
-.search-form select {
-  border: none;
-  outline: none;
-  font-size: 14px;
-  background: transparent;
-}
-
-/* input 스타일 */
-.search-form input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 14px;
-}
-
-/* 검색 버튼 */
-.search-form button {
-  background: #f5a623;
-  border: none;
-  border-radius: 30px;
-  padding: 8px 18px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #fff;
-}
-
-/* hover 효과 */
-.search-form button:hover {
-  background: #ffb84d;
 }
 
 /* =========================
@@ -114,47 +63,38 @@
 }
 
 /* =========================
-   테이블 스타일
+   테이블 스타일 (PC 최적화)
 ========================= */
 .board-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-/* 헤더 */
-.board-table thead {
-  background: #fff8e6;
 }
 
 .board-table th {
-  padding: 12px;
-  font-size: 14px;
+  padding: 22px 10px;
+  background-color: #fafafa;
   color: #444;
+  font-weight: 700;
+  font-size: 1rem;
+  border-bottom: 1.5px solid #eee;
 }
 
-/* 데이터 */
 .board-table td {
-  padding: 12px;
+  padding: 24px 10px;
+  border-bottom: 1px solid #f5f5f5;
+  color: #555;
   text-align: center;
-  font-size: 14px;
+  transition: all 0.2s;
 }
 
-/* 제목 왼쪽 정렬 */
-.td-title {
-  text-align: left;
-}
-
-/* hover 효과 */
+/* 행 스타일 및 호버 효과 */
 .board-row {
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.board-row:hover {
-  background: #fff8e6;
+.board-row:hover td {
+  background-color: #fffdf2;
+  color: #000;
 }
 
 /* =========================
@@ -163,11 +103,18 @@
 .title-wrapper {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px; /* 아이콘과 제목 사이 간격 넓힘 */
+}
+
+/* 텍스트가 너무 길어지면 말줄임표 처리 (선택사항) */
+.title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .img-icon {
-  font-size: 14px;
+  font-size: 18px; /* 아이콘 크기도 살짝 업 */
 }
 
 /* =========================
@@ -175,8 +122,9 @@
 ========================= */
 .empty-row {
   text-align: center;
-  padding: 20px;
-  color: #999;
+  padding: 60px 0; /* 빈 화면은 아예 넉넉하게 여백 */
+  color: #bbb;
+  font-size: 16px;
 }
 
 /* =========================
@@ -186,4 +134,144 @@
   margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+
+/* ============================================================
+   [공통] 꿀템 통합 검색창 스타일 (Search Form)
+   - 아이템 게시판 & 일반 게시판 모두 이 스타일을 공유합니다.
+============================================================ */
+.search-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  /* 꿀템 시그니처 테두리와 둥근 모서리 */
+  border: 2px solid #FFD700; 
+  border-radius: 50px; 
+  padding: 10px 16px;
+
+  background: white;
+  max-width: 650px; /* PC에서 시원하게 보임 */
+  margin: 0 auto 30px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1); /* 은은한 꿀빛 그림자 */
+  transition: all 0.3s ease;
+}
+
+.search-form-container:focus-within {
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* select 스타일 */
+.search-form-container select {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+  background: transparent;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+/* 구분선 (선택사항: 깔끔함을 위해 추가) */
+.search-form-container .divider {
+  width: 1px;
+  height: 20px;
+  background-color: #eee;
+  margin: 0 10px;
+}
+
+/* input 스타일 */
+.search-form-container input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-form-container input::placeholder {
+  color: #bbb;
+}
+
+/* 검색 버튼 */
+.search-form-container button {
+  background: #FFD700;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  color: #3F2E1B; /* 벌꿀 갈색 글자 */
+  transition: all 0.2s;
+}
+
+.search-form-container button:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   [추가] 게시판 리스트 & 테이블 강화 스타일 (PC 최적화)
+============================================================ */
+.board-list-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* 테이블 헤더 강조 */
+.board-table thead {
+  background-color: #FFFCEB;
+  border-top: 2px solid #FFD700;
+}
+
+.board-table th {
+  padding: 20px 12px;
+  font-size: 16px;
+  color: #3F2E1B;
+}
+
+/* 테이블 바디 패딩 및 폰트 */
+.board-table td {
+  padding: 18px 12px;
+  font-size: 15px;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+/* 글쓰기 버튼 (검색창과 세트 느낌) */
+.write-btn {
+  background: #3F2E1B; /* 버튼은 진한 갈색으로 대비를 줌 */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.write-btn:hover {
+  opacity: 0.9;
+}
+
+/* 반응형 (모바일 처리) */
+@media (max-width: 768px) {
+  .search-form-container {
+    max-width: 90%;
+    padding: 8px 12px;
+  }
+  .search-form-container select {
+    font-size: 13px;
+  }
+  .search-form-container input {
+    font-size: 14px;
+  }
+  .search-form-container button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
 }

@@ -1,247 +1,141 @@
-.fraud-page-root {
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
+/* ✅ 전체 레이아웃 (2단 구성) */
 .fraud-layout-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 50px 20px;
-  width: 100%;
+  padding: 40px 20px;
 }
 
 .fraud-content-wrapper {
   display: flex;
-  gap: 25px;
+  gap: 30px;
   align-items: flex-start;
 }
 
+/* ✅ 메인 섹션 (왼쪽) */
 .fraud-main-section {
-  flex: 2.5;
-  background: #fff;
-  border-radius: 15px;
-  padding: 35px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  min-height: 520px;
+  flex: 1.5;
+  border-radius: 30px;
+  padding: 40px;
 }
 
 .fraud-search-header-box {
-  margin-bottom: 30px;
-}
-.fraud-search-title {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #333;
-  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
+.fraud-search-title {
+  font-size: 28px;
+  color: #3F2E1B;
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+
+/* 통합 검색바 다이어트 */
 .fraud-search-input-group {
   display: flex;
-  gap: 10px;
+  background: #fff;
+  border: 2px solid #FFD700;
+  border-radius: 50px;
+  padding: 5px 5px 5px 20px;
+  max-width: 500px;
+  margin: 0 auto;
 }
+
 .fraud-search-input-group input {
   flex: 1;
-  padding: 14px 20px;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  font-size: 16px;
-  outline: none;
-}
-.fraud-search-input-group input:focus {
-  border-color: #4a90e2;
-}
-.fraud-search-input-group button {
-  width: 60px;
-  background: #4a4a4a;
-  color: white;
   border: none;
-  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.fraud-search-input-group button {
+  background: #FFD700;
+  border: none;
+  border-radius: 40px;
+  padding: 10px 25px;
+  font-weight: 800;
   cursor: pointer;
-  font-size: 20px;
+  color: #3F2E1B;
 }
 
-.fraud-status-box {
-  padding: 40px;
-  border-radius: 12px;
-  text-align: center;
-}
-.fraud-status-icon {
-  font-size: 50px;
-  margin-bottom: 15px;
-}
-
-.fraud-status-box.danger {
-  background-color: #fff5f5;
-  border: 1px solid #ffe3e3;
-}
-.fraud-status-box.safe {
-  background-color: #f8fff9;
-  border: 1px solid #e6fcf5;
-}
-.fraud-status-box.not-found {
-  background-color: #f1f3f5;
-  border: 1px solid #dee2e6;
-}
-
-.danger-text {
-  color: #e03131;
-  font-size: 20px;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-.not-found-text {
-  margin-top: 15px;
-  color: #666;
-  font-size: 15px;
-}
-.not-found-text strong {
-  color: #333;
-  text-decoration: underline;
-}
-.safe-notice {
-  margin-top: 15px;
-  font-size: 13px;
-  color: #888;
-}
-
-.fraud-placeholder {
-  text-align: center;
-  color: #999;
-  padding: 100px 0;
-}
-
-.fraud-info-table {
-  width: 100%;
-  margin-top: 25px;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.fraud-info-table th,
-.fraud-info-table td {
-  padding: 15px;
-  border: 1px solid #eee;
-  text-align: left;
-}
-.fraud-info-table th {
-  background: #f9f9f9;
-  width: 30%;
-  color: #666;
-  font-weight: 600;
-}
-.status-highlight-red {
-  color: #e03131;
-  font-weight: bold;
-}
-.status-highlight-green {
-  color: #2f9e44;
-  font-weight: bold;
-}
-
+/* ✅ 사이드바 (오른쪽 통계) */
 .fraud-sidebar {
-  flex: 1;
+  flex: 0.7;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-width: 280px;
-}
-.stat-card {
-  background: white;
-  padding: 22px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.highlight-card {
-  border: 2px solid #ff6b6b;
-  background: #fff5f5;
-}
-.stat-label {
-  font-size: 13px;
-  color: #888;
-  font-weight: 600;
-}
-.stat-value {
-  font-size: 26px;
-  font-weight: 800;
-  color: #222;
 }
 
-.fraud-chart-section {
-  background: white;
+.stat-card {
+  background: #fff;
   padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1.5px solid #f2f2f2;
+  margin-bottom: 10px;
 }
-.chart-title {
-  font-size: 14px;
-  margin-bottom: 20px;
-  color: #555;
-  font-weight: 600;
+
+.highlight-card {
+  background: #FFFCEB;
+  border-color: #FFD700;
 }
+
+.stat-label { font-size: 14px; color: #888; font-weight: 600; }
+.stat-value { font-size: 32px; color: #3F2E1B; font-weight: 900; }
+
+/* ✅ 차트 스타일 */
+.fraud-chart-section {
+  background: #fff;
+  padding: 25px;
+  border-radius: 20px;
+  border: 1.5px solid #f2f2f2;
+}
+
+.chart-title { font-size: 15px; margin-bottom: 20px; color: #555; }
+
 .bar-chart-visual {
-  height: 120px;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  border-bottom: 2px solid #f1f3f5;
-  padding: 0 10px 5px 10px;
+  justify-content: space-around;
+  height: 150px;
+  padding: 10px;
+  border-bottom: 2px solid #eee;
 }
-.bar-container {
-  width: 15%;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
+
+.bar-container { width: 15%; height: 100%; display: flex; align-items: flex-end; }
+
 .bar {
   width: 100%;
-  background: #dee2e6;
-  border-radius: 4px 4px 0 0;
-  transition: height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: #FFD700;
+  border-radius: 5px 5px 0 0;
   position: relative;
-  cursor: pointer;
+  transition: height 0.5s ease-out;
 }
-.bar:hover {
-  background: #adb5bd;
-}
-.bar-container:last-child .bar {
-  background: #ff6b6b;
-}
+
 .bar-tooltip {
   position: absolute;
   top: -25px;
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
-  color: white;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.2s;
-  white-space: nowrap;
-}
-.bar:hover .bar-tooltip {
-  opacity: 1;
-}
-.chart-footer {
   font-size: 11px;
-  color: #adb5bd;
-  margin-top: 15px;
+  font-weight: 700;
+  color: #FFB700;
+}
+
+.fraud-placeholder {
   text-align: center;
 }
 
-@media (max-width: 900px) {
-  .fraud-content-wrapper {
-    flex-direction: column;
-  }
-  .fraud-sidebar {
-    width: 100%;
-  }
-}
+.chart-footer { font-size: 12px; color: #bbb; text-align: center; margin-top: 15px; }
+
+/* 결과창 스타일 (간략히) */
+.fraud-status-box { padding: 40px; border-radius: 20px; text-align: center; }
+.fraud-status-box.safe { background: #F6FFF8; border: 2px solid #40C057; }
+.fraud-status-box.danger { background: #FFF5F5; border: 2px solid #FF4D4D; }
+
+.fraud-info-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+.fraud-info-table th { text-align: left; padding: 12px; color: #888; border-bottom: 1px solid #eee; }
+.fraud-info-table td { text-align: right; padding: 12px; font-weight: 700; border-bottom: 1px solid #eee; }

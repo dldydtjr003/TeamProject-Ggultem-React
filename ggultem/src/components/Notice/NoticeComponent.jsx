@@ -47,7 +47,7 @@ const NoticeComponent = () => {
       <div className="board-list-container">
         {/* 상단 헤더 섹션 */}
         <div className="board-header">
-          <h2 className="board-title">📢 공지사항</h2>
+          <h2 className="board-title">공지사항</h2>
           <p className="board-subtitle">중요한 소식과 안내를 확인하세요.</p>
 
           <div className="board-actions">

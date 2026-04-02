@@ -68,6 +68,17 @@
   outline: none;
 }
 
+.mainpage-search-form-wide:focus-within {
+  /* 🚩 검은색 대신 벌꿀 갈색으로 부드럽게 변경 */
+  border-color: #ffb700 !important; 
+  box-shadow: 0 10px 40px rgba(255, 183, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.mainpage-search-type-select:focus {
+  outline: none;
+}
+
 .mainpage-search-btn-wide {
   background-color: var(--honey-color);
   color: var(--bee-brown);
