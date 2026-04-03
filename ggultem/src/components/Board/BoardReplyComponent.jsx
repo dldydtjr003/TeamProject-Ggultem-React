@@ -6,6 +6,11 @@ import {
   removeReply
 } from "../../api/BoardReplyApi";
 import { useSelector } from "react-redux";
+
+//  신고
+import useReport from "../../hooks/useReport";
+import ReportModal from "../../common/ReportModal";
+
 import "./BoardReplyComponent.css";
 
 const BoardReplyComponent = ({ boardNo }) => {
@@ -21,6 +26,10 @@ const BoardReplyComponent = ({ boardNo }) => {
 
   const loginState = useSelector(state => state.loginSlice);
   const email = loginState?.email;
+
+  //  신고 상태
+  const { showModal, setShowModal, sendReport } = useReport();
+  const [targetData, setTargetData] = useState(null);
 
   const loadReplies = () => {
     getReplyList(boardNo).then((data) => {
@@ -89,6 +98,16 @@ const BoardReplyComponent = ({ boardNo }) => {
     });
   };
 
+
+  const sendTargetData = (reply) => {
+    setTargetData({
+      targetType: "코멘트",
+      targetNo: reply.replyNo,
+      targetMemberId: reply.email,
+    })
+    console.log(targetData);
+  }
+
   return (
     <div className="reply-wrapper">
       <h3>댓글</h3>
@@ -127,6 +146,18 @@ const BoardReplyComponent = ({ boardNo }) => {
                   <div>{reply.content}</div>
                 )}
               </div>
+            )}
+
+            {/*  신고 버튼 (본인 제외) */}
+            {reply.enabled !== 0 && email && reply.email !== email && (
+              <button
+                onClick={() => {
+                  sendTargetData(reply);
+                  setShowModal(true);
+                }}
+              >
+                🚨 신고
+              </button>
             )}
 
             {reply.enabled !== 0 && email && (
@@ -182,6 +213,18 @@ const BoardReplyComponent = ({ boardNo }) => {
                       </div>
                     )}
 
+                    {/*  대댓글 신고 (본인 제외) */}
+                    {child.enabled !== 0 && email && child.email !== email && (
+                      <button
+                        onClick={() => {
+                          sendTargetData(child);
+                          setShowModal(true);
+                        }}
+                      >
+                        🚨 신고
+                      </button>
+                    )}
+
                     {child.enabled !== 0 && child.email === email && (
                       <>
                         <button onClick={() => handleModify(child)}>수정</button>
@@ -196,6 +239,17 @@ const BoardReplyComponent = ({ boardNo }) => {
 
         </div>
       ))}
+
+      {/*  신고 모달 */}
+      {targetData && (
+        <ReportModal
+          show={showModal}
+          targetData={targetData}
+          callbackFn={() => setShowModal(false)}
+          submitFn={sendReport}
+        />
+      )}
+
     </div>
   );
 };
