@@ -13,7 +13,7 @@ const ProcessComponent = ({ reportId, onComplete }) => {
 
   const [processData, setProcessData] = useState({
     actionNote: "",
-    memberStatus: 0,
+    memberStatus: 1,
   });
 
   const handleClickProcess = () => {
