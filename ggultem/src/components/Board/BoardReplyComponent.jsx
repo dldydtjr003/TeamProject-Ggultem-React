@@ -6,6 +6,11 @@ import {
   removeReply,
 } from "../../api/BoardReplyApi";
 import { useSelector } from "react-redux";
+
+//  신고
+import useReport from "../../hooks/useReport";
+import ReportModal from "../../common/ReportModal";
+
 import "./BoardReplyComponent.css";
 
 const BoardReplyComponent = ({ boardNo }) => {
@@ -20,6 +25,10 @@ const BoardReplyComponent = ({ boardNo }) => {
 
   const loginState = useSelector((state) => state.loginSlice);
   const email = loginState?.email;
+
+  //  신고 상태
+  const { showModal, setShowModal, sendReport } = useReport();
+  const [targetData, setTargetData] = useState(null);
 
   const loadReplies = () => {
     getReplyList(boardNo).then((data) => {
@@ -87,6 +96,16 @@ const BoardReplyComponent = ({ boardNo }) => {
       loadReplies();
     });
   };
+
+
+  const sendTargetData = (reply) => {
+    setTargetData({
+      targetType: "코멘트",
+      targetNo: reply.replyNo,
+      targetMemberId: reply.email,
+    })
+    console.log(targetData);
+  }
 
   return (
     <div className="reply-container">
@@ -197,74 +216,107 @@ const BoardReplyComponent = ({ boardNo }) => {
               </div>
             )}
 
-            {/* 대댓글 */}
-            <div className="child-reply-list">
-              {childReplies
-                .filter((child) => child.parentReplyNo === reply.replyNo)
-                .map((child) => (
-                  <div key={child.replyNo} className="child-reply-item">
-                    <div className="reply-info">
-                      <span className="reply-writer">
-                        ㄴ{" "}
-                        {child.enabled == 0
-                          ? child.writer
-                          : child.writer || child.email}
-                      </span>
-                      <span className="reply-date">
-                        {child.regDate
-                          ? child.regDate.split(" ")[0]
-                          : "방금 전"}
-                      </span>
-                    </div>
+            {/*  신고 버튼 (본인 제외) */}
+            {reply.enabled !== 0 && email && reply.email !== email && (
+              <button
+                onClick={() => {
+                  sendTargetData(reply);
+                  setShowModal(true);
+                }}
+              >
+                🚨 신고
+              </button>
+            )}
 
-                    <div className="reply-content-box">
-                      {Number(child.enabled) === 0 ? (
-                        <div className="reply-text deleted-text">
-                          <span className="text-muted">삭제된 댓글입니다.</span>
-                        </div>
-                      ) : modifyReplyNo === child.replyNo ? (
-                        <div className="modify-box">
-                          <input
-                            className="modify-input"
-                            value={modifyContent}
-                            onChange={(e) => setModifyContent(e.target.value)}
-                          />
-                          <div className="modify-btns">
-                            <button
-                              onClick={() => handleModifySubmit(child.replyNo)}
-                            >
-                              완료
-                            </button>
-                            <button
-                              className="cancel-btn"
-                              onClick={() => setModifyReplyNo(null)}
-                            >
-                              취소
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="reply-text">{child.content}</div>
-                      )}
-                    </div>
+            {reply.enabled !== 0 && email && (
+              <button onClick={() => setOpenReplyNo(reply.replyNo)}>
+                답글쓰기
+              </button>
+            )}
 
-                    {/* 대댓글 액션 버튼 */}
-                    {Number(child.enabled) === 1 && child.email === email && (
-                      <div className="reply-actions small">
-                        <button onClick={() => handleModify(child)}>
-                          수정
-                        </button>
-                        <button onClick={() => handleDelete(child.replyNo)}>
-                          삭제
-                        </button>
+            {reply.enabled !== 0 && reply.email === email && (
+              <>
+                <button onClick={() => handleModify(reply)}>수정</button>
+                <button onClick={() => handleDelete(reply.replyNo)}>삭제</button>
+              </>
+            )}
+          </div>
+
+          {/* 대댓글 입력 */}
+          {openReplyNo === reply.replyNo && (
+            <div className="child-input">
+              <textarea
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
+              />
+              <button onClick={() => handleAddChildReply(reply.replyNo)}>등록</button>
+              <button onClick={() => setOpenReplyNo(null)}>취소</button>
+            </div>
+          )}
+
+          {/* 대댓글 */}
+          <div className="child-reply-list">
+            {childReplies
+              .filter(child => child.parentReplyNo === reply.replyNo)
+              .map(child => (
+                <div key={child.replyNo} className="child-reply">
+
+                  <span className="reply-arrow">↳</span>
+
+                  <div>
+                    <strong>{child.writer}</strong>
+
+                    {modifyReplyNo === child.replyNo ? (
+                      <>
+                        <textarea
+                          value={modifyContent}
+                          onChange={(e) => setModifyContent(e.target.value)}
+                        />
+                        <button onClick={() => handleModifySubmit(child.replyNo)}>완료</button>
+                        <button onClick={() => setModifyReplyNo(null)}>취소</button>
+                      </>
+                    ) : (
+                      <div>
+                        {child.enabled === 0 ? "삭제된 댓글입니다" : child.content}
                       </div>
+                    )}
+
+                    {/*  대댓글 신고 (본인 제외) */}
+                    {child.enabled !== 0 && email && child.email !== email && (
+                      <button
+                        onClick={() => {
+                          sendTargetData(child);
+                          setShowModal(true);
+                        }}
+                      >
+                        🚨 신고
+                      </button>
+                    )}
+
+                    {child.enabled !== 0 && child.email === email && (
+                      <>
+                        <button onClick={() => handleModify(child)}>수정</button>
+                        <button onClick={() => handleDelete(child.replyNo)}>삭제</button>
+                      </>
                     )}
                   </div>
                 ))}
             </div>
           </div>
-        ))}
-      </div>
+
+        </div>
+      ))}
+
+      {/*  신고 모달 */}
+      {targetData && (
+        <ReportModal
+          show={showModal}
+          targetData={targetData}
+          callbackFn={() => setShowModal(false)}
+          submitFn={sendReport}
+        />
+      )}
+
     </div>
   );
 };
