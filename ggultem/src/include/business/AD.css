@@ -18,7 +18,6 @@
 /* 파워링크(리스트형) 섹션 래퍼 */
 .AD-section-all-PowerLink {
   width: 100%;
-  background-color: #ffffff;
   /* 파워링크 쪽이 너무 길어 보이면 padding으로 조절 */
 }
 

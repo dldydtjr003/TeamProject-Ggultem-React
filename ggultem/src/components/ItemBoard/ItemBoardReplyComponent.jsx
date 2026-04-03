@@ -226,9 +226,7 @@ const ItemBoardReplyComponent = ({ itemId }) => {
                     <div className="reply-content-box">
                       {Number(child.enabled) === 0 ? (
                         <div className="reply-text deleted-text">
-                          <span className="text-muted">
-                            🔒 삭제된 댓글입니다.
-                          </span>
+                          <span className="text-muted">삭제된 댓글입니다.</span>
                         </div>
                       ) : modifyReplyNo === child.replyNo ? (
                         <div className="modify-box">
@@ -237,14 +235,19 @@ const ItemBoardReplyComponent = ({ itemId }) => {
                             value={modifyContent}
                             onChange={(e) => setModifyContent(e.target.value)}
                           />
-                          <button
-                            onClick={() => handleModifySubmit(child.replyNo)}
-                          >
-                            완료
-                          </button>
-                          <button onClick={() => setModifyReplyNo(null)}>
-                            취소
-                          </button>
+                          <div className="modify-btns">
+                            <button
+                              onClick={() => handleModifySubmit(child.replyNo)}
+                            >
+                              완료
+                            </button>
+                            <button
+                              className="cancel-btn"
+                              onClick={() => setModifyReplyNo(null)}
+                            >
+                              취소
+                            </button>
+                          </div>
                         </div>
                       ) : (
                         <div className="reply-text">{child.content}</div>

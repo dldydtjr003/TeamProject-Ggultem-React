@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import ReadComponent from "../../../components/admin/ReportProcess/ReadComponent";
+import "./ListPage.css";
+import Menu from "../../../include/admin/Menu";
 
 const ReadPage = () => {
   const { reportId } = useParams();
@@ -8,10 +10,12 @@ const ReadPage = () => {
   const cleanReportId = reportId ? reportId.split("?")[0] : null;
 
   return (
-    <div className="notice-page-wrapper">
-      <main className="notice-main-content">
-        {/* 정제된 숫자 ID를 컴포넌트에 전달 */}
-        <ReadComponent reportId={cleanReportId} />
+    <div className="report-page-wrapper">
+      <Menu />
+      <main className="report-main-content">
+        <div className="report-hero-section">
+          <ReadComponent reportId={cleanReportId} />
+        </div>
       </main>
     </div>
   );

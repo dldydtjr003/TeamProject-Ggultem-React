@@ -108,7 +108,11 @@ const RegisterPage = () => {
               readOnly={isVerified} // ✨ 인증되면 읽기 전용으로!
               className={isVerified ? "input-verified" : ""}
             />
-            <button onClick={handleVerify} disabled={isVerified}>
+            <button
+              className="business-verified-btn"
+              onClick={handleVerify}
+              disabled={isVerified}
+            >
               {isVerified ? "인증 완료 ✅" : "사업자 인증"}
             </button>
           </div>

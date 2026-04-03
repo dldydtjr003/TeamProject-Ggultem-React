@@ -1,10 +1,10 @@
 /* 전체 레이아웃 */
-.biz-list-wrapper {
+.data-list-wrapper {
   width: 1200px;
   margin-bottom: 20px;
 }
 
-.biz-stats-container {
+.data-stats-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px;
@@ -13,7 +13,7 @@
 }
 
 /* 카드들을 감싸는 컨테이너 */
-.stats-summary {
+.data-stats-summary {
   display: flex;
   flex-direction: column; /* 세로로 먼저 쌓기 */
   gap: 20px;
@@ -21,35 +21,35 @@
 }
 
 /* 🏆 All DashBoard (상단에 단독 배치) */
-.stats-summary > .stats-card:first-child {
+.data-stats-summary > .data-stats-card:first-child {
   background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
   color: white;
   border: none;
 }
 
-.stats-summary > .stats-card:first-child h4 {
+.data-stats-summary > .data-stats-card:first-child h4 {
   color: #fff;
   border-left-color: #E2012D; /* T1 레드 포인트 */
 }
 
-.stats-summary > .stats-card:first-child .info-wrapper p {
+.data-stats-summary > .data-stats-card:first-child .data-info-wrapper p {
   color: #ccc;
 }
 
-.stats-summary > .stats-card:first-child span {
+.data-stats-summary > .data-stats-card:first-child span {
   color: #fff;
   font-size: 24px;
 }
 
 /* 📊 하단 2개 카드를 감싸는 영역 */
-.stats-summary > .stats-summary-2 {
+.data-stats-summary > .data-stats-summary-2 {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 1:1 비율로 나란히 */
   gap: 20px;
 }
 
 /* 공통 카드 스타일 */
-.stats-card {
+.data-stats-card {
   background: #fff;
   border: 1px solid #f0f0f0;
   border-radius: 20px;
@@ -58,12 +58,12 @@
   transition: all 0.3s ease;
 }
 
-.stats-card:hover {
+.data-stats-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.stats-card h4 {
+.data-stats-card h4 {
   margin: 0 0 20px 0;
   font-size: 16px;
   font-weight: 700;
@@ -72,11 +72,11 @@
 }
 
 /* 개별 카드 포인트 컬러 */
-.stats-card:nth-child(1) h4 { border-left-color: #ffcc00; } /* All/파워링크 레드 */
-.stats-card:nth-child(2) h4 { border-left-color: #6d5908; } /* 파워쇼핑 옐로우 */ 
+.data-stats-card:nth-child(1) h4 { border-left-color: #ffcc00; } /* All/파워링크 레드 */
+.data-stats-card:nth-child(2) h4 { border-left-color: #6d5908; } /* 파워쇼핑 옐로우 */ 
 
 /* 텍스트 정렬 */
-.info-wrapper p {
+.data-info-wrapper p {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,7 +85,7 @@
   color: #666;
 }
 
-.info-wrapper span {
+.data-info-wrapper span {
   font-size: 20px;
   font-weight: 800;
   color: #222;

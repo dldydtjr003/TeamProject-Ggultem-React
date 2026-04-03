@@ -28,7 +28,6 @@
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  background: #f8f9fa;
   padding: 15px;
   border-radius: 8px;
 }
@@ -45,12 +44,21 @@
   flex: 1;
   min-width: 200px;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #ffb700;
   border-radius: 5px;
 }
 
+.codegroup-actions input[type="text"]:focus-within {
+  border-color: #ffb700 !important; 
+  transition: all 0.3s ease;
+}
+
+.codegroup-actions input:focus {
+  outline: none;
+}
+
 .search-btn-wide {
-  background-color: #c7ae4c;
+  background-color: #ffb700;
   color: white;
   border: none;
   padding: 8px 20px;
@@ -61,7 +69,7 @@
 }
 
 .search-btn-wide:hover {
-  background-color: #473900;
+  background-color: #c3941d;
 }
 
 .admin-btn-group {

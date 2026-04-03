@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// API 함수들 import 확인
 import {
   getOne,
   putOne,
@@ -33,41 +32,55 @@ const BlackListModal = ({ blId, callbackFn }) => {
     setBlackList({ ...blackList, [e.target.name]: e.target.value });
   };
 
-  // --- 💡 [수정] 내용 수정 버튼 핸들러 (async/await 및 에러 처리 추가) ---
+  // --- 💡 [수정됨] 내용 수정 버튼 핸들러 ---
   const handleClickModify = async () => {
     if (!window.confirm("내용을 수정하시겠습니까?")) return;
 
     setLoading(true);
     try {
-      // 날짜 데이터가 비어있을 경우 처리 (백엔드 LocalDateTime 형식 맞춤)
+      const now = new Date();
+      let updatedStatus = blackList.status; // 기본은 기존 상태 유지
+
+      // 1. 날짜 데이터 포맷팅 (T23:59:59 추가)
+      const formattedEndDate = blackList.endDate
+        ? blackList.endDate.includes("T")
+          ? blackList.endDate
+          : `${blackList.endDate}T23:59:59`
+        : null;
+
+      // 2. 💡 [핵심 로직] 종료일이 설정되어 있고, 현재 시간보다 이전인지 체크
+      if (formattedEndDate) {
+        const selectedDate = new Date(formattedEndDate);
+        if (selectedDate < now) {
+          // 종료일이 과거라면 차단 해제 상태(N)로 자동 변경
+          updatedStatus = "N";
+          alert(
+            "설정하신 종료일이 현재 시간보다 이전이므로 차단이 해제(N) 상태로 변경됩니다.",
+          );
+        } else {
+          // 종료일이 미래라면 다시 차단 상태(Y)로 유지/변경
+          updatedStatus = "Y";
+        }
+      }
+
       const formattedData = {
         ...blackList,
-        endDate: blackList.endDate
-          ? blackList.endDate.includes("T")
-            ? blackList.endDate
-            : `${blackList.endDate}T23:59:59`
-          : null,
+        endDate: formattedEndDate,
+        status: updatedStatus, // 보정된 상태값 적용
       };
 
-      console.log("수정 요청 데이터:", formattedData);
-
-      const response = await putOne(formattedData);
-      console.log("수정 응답 결과:", response);
-
+      await putOne(formattedData);
       alert("성공적으로 수정되었습니다.");
-      callbackFn(true); // 대시보드 리스트 갱신 및 모달 닫기
+      callbackFn(true); // 리스트 새로고침
     } catch (error) {
-      console.error(
-        "수정 중 오류 발생:",
-        error.response?.data || error.message,
-      );
+      console.error("수정 중 오류 발생:", error);
       alert("수정에 실패했습니다. 입력값을 확인해주세요.");
     } finally {
       setLoading(false);
     }
   };
 
-  // --- 💡 재차단/해제 토글 핸들러 (기존 중복체크 포함) ---
+  // --- 재차단/해제 토글 핸들러 ---
   const handleClickToggleStatus = async () => {
     const isActive = blackList.status === "Y";
 
@@ -75,6 +88,7 @@ const BlackListModal = ({ blId, callbackFn }) => {
       if (window.confirm("정말 차단을 해제하시겠습니까?")) {
         setLoading(true);
         try {
+          // 단순히 삭제(해제)만 하는 경우
           await deleteOne(blId);
           alert("차단이 해제되었습니다.");
           callbackFn(true);
@@ -101,8 +115,15 @@ const BlackListModal = ({ blId, callbackFn }) => {
           );
 
           if (alreadyActive) {
+            alert("이미 차단 중(Y)인 동일 이메일 기록이 존재합니다.");
+            setLoading(false);
+            return;
+          }
+
+          // 재차단 시 종료일 체크 (과거 날짜면 차단 불가)
+          if (blackList.endDate && new Date(blackList.endDate) < new Date()) {
             alert(
-              `이미 차단 중(Y)인 동일 이메일 기록이 존재합니다.\n중복 차단은 불가능합니다.`,
+              "과거의 날짜로는 다시 차단할 수 없습니다. 종료일을 수정해주세요.",
             );
             setLoading(false);
             return;
@@ -210,6 +231,7 @@ const BlackListModal = ({ blId, callbackFn }) => {
   );
 };
 
+// ... modalStyles 객체는 기존과 동일
 const modalStyles = {
   overlay: {
     position: "fixed",

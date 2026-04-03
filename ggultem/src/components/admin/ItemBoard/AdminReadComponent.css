@@ -1,7 +1,6 @@
 .admin-main-wrapper {
   width: 100%;
   min-height: 100vh;
-  background-color: #f8f9fa;
   display: flex;
   justify-content: center;
   padding: 60px 0;
@@ -12,7 +11,12 @@
   background: #fff;
   border-radius: 20px;
   padding: 50px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.admin-title {
+    font-size: 1.6rem;
+    color: #343a40;
+    margin: 0;
 }
 
 /* 상단 상품 정보 레이아웃 */

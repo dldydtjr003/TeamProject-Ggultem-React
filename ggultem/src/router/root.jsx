@@ -64,10 +64,16 @@ const AdminItemBoardRegister = lazy(
 const ItemBoardReply = lazy(
   () => import("../pages/admin/ItemBoard/AdminReplyPage"),
 );
-// ✅ 블랙리스트 관리 페이지 (추가됨)
+// 블랙리스트 관리 페이지 (추가됨)
 const BlackListIndex = lazy(() => import("../pages/admin/BlackList/IndexPage"));
 const BlackListAdd = lazy(() => import("../pages/admin/BlackList/AddPage"));
 const BlackListRead = lazy(() => import("../pages/admin/BlackList/ReadPage"));
+
+// 광고 배너 등록 페이지
+const BannerList = lazy(() => import("../pages/admin/Banner/ListPage"));
+const BannerRegister = lazy(() => import("../pages/admin/Banner/RegisterPage"));
+const BannerRead = lazy(() => import("../pages/admin/Banner/ReadPage"));
+const BannerModify = lazy(() => import("../pages/admin/Banner/ModifyPage"));
 
 //* 사용자 페이지 ================================================================================================================ */
 const Main = lazy(() => import("../pages/MainPage"));
@@ -105,7 +111,7 @@ const BusinessAdCenter = lazy(
 );
 //* 공지사항 lazy */
 const NoticeList = lazy(() => import("../pages/Notice/NoticePage"));
-const NoticeRead = lazy(() => import("../pages/Notice/NoticeRead"));
+const NoticeRead = lazy(() => import("../pages/Notice/NoticeReadPage"));
 //* 커뮤니티 lazy */
 const BoardList = lazy(() => import("../pages/Board/BoardListPage"));
 const BoardRead = lazy(() => import("../pages/Board/BoardReadPage"));
@@ -126,13 +132,20 @@ const ItemBoardModify = lazy(
 );
 //* 장바구니 페이지 */
 const CartList = lazy(() => import("../pages/Cart/CartListPage"));
+const MyPageList = lazy(() => import("../pages/itemBoard/MyPageList"));
 // ✅ 신고 관리 페이지 추가
 const ReportListAdmin = lazy(
-  () => import("../components/admin/ReportProcess/ListComponent"),
+  () => import("../pages/admin/ReportProcess/ListPage"),
 );
 const ReportReadAdmin = lazy(
   () => import("../pages/admin/ReportProcess/ReadPage"),
 );
+// ✅ [추가] 사용자 사기조회 페이지 (FraudSearch)
+const FraudSearch = lazy(() => import("../pages/Report/FraudSearchPage"));
+
+//비즈머니 충전 성공 페이지
+const PaySuccess = lazy(() => import("../pages/Pay/SuccessPage"));
+const PayFail = lazy(() => import("../pages/Pay/FailPage"));
 
 const root = createBrowserRouter([
   /* ===== 관리자 영역 ============================================================================================== */
@@ -375,6 +388,39 @@ const root = createBrowserRouter([
       </Suspense>
     ),
   },
+  /* ===== 광고배너 관리 영역 ============================================================================================== */
+  {
+    path: "admin/banner/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <BannerList />
+      </Suspense>
+    ),
+  },
+  {
+    path: "admin/banner/register",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <BannerRegister />
+      </Suspense>
+    ),
+  },
+  {
+    path: "admin/banner/:no",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <BannerRead />
+      </Suspense>
+    ),
+  },
+  {
+    path: "admin/banner/modify/:no",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <BannerModify />
+      </Suspense>
+    ),
+  },
 
   /* 사용자 페이지 영역 ====================================================================================================== */
   /* ===== 메인페이지 연결 영역 ============================================================================================== */
@@ -497,6 +543,14 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <CartList />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/itemBoard/myPage",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <MyPageList />
       </Suspense>
     ),
   },
@@ -624,6 +678,22 @@ const root = createBrowserRouter([
       </Suspense>
     ),
   },
+  {
+    path: "/business/bizmoney/success",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <PaySuccess />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/business/bizmoney/fail",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <PayFail />
+      </Suspense>
+    ),
+  },
   // ✅ 관리자 신고 관리
   {
     path: "admin/report",
@@ -645,6 +715,15 @@ const root = createBrowserRouter([
         ),
       },
     ],
+  },
+  // ✅ [추가] 사기조회 (FraudSearch) 페이지 경로
+  {
+    path: "/report",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <FraudSearch />
+      </Suspense>
+    ),
   },
 ]);
 

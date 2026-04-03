@@ -238,7 +238,7 @@ const ItemBoardRegister = () => {
               onClick={handleSearchAddress}
               style={{
                 padding: "8px 15px",
-                backgroundColor: "#007bff",
+                backgroundColor: "#ffb700",
                 color: "white",
                 border: "none",
                 borderRadius: "4px",
@@ -282,7 +282,7 @@ const ItemBoardRegister = () => {
           {/* 현재 선택된 지역 확인용 (수정 가능하게 하려면 input으로 두셔도 됩니다) */}
           <div style={{ marginTop: "5px" }}>
             <span
-              style={{ fontSize: "13px", fontWeight: "bold", color: "#2d8cf0" }}
+              style={{ fontSize: "13px", fontWeight: "bold", color: "#ffb700" }}
             >
               설정된 지역:{" "}
               {item.location || "지도에서 검색하거나 마커를 옮겨주세요."}
