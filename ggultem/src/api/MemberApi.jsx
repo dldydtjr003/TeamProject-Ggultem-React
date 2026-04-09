@@ -9,7 +9,7 @@ const host = `${API_SERVER_HOST}`;
 
 // REST API 키와 리다이렉트 주소를 상수로 관리
 const REST_API_KEY = "926c20ad6655d0951df3feb3788f0d99";
-const REDIRECT_URI = "https://ggultem.shop/member/kakao";
+const REDIRECT_URI = "https://www.ggultem.shop/member/kakao";
 
 // 카카오 로그인창 주소 생성
 export const getKakaoLoginLink = () => {
