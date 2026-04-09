@@ -1,6 +1,8 @@
 import axios from "axios";
 import { API_SERVER_HOST } from "./config";
 
+export { API_SERVER_HOST };
+
 //export const API_SERVER_HOST = "http://localhost:8080";
 const host = `${API_SERVER_HOST}/chatroom`;
 

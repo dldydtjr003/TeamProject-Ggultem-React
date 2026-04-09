@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_SERVER_HOST } from "../config";
-
+export { API_SERVER_HOST };
 
 // 관리자용 댓글 리스트 (주소를 컨트롤러에 맞춰서 정확히 입력)
 export const adminList = async (params) => {

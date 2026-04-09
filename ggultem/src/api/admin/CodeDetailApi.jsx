@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_SERVER_HOST } from "../config";
+export { API_SERVER_HOST };
 const prefix = `${API_SERVER_HOST}/codedetail`;
 
 // 특정 그룹에 속한 상세 코드 목록 가져오기

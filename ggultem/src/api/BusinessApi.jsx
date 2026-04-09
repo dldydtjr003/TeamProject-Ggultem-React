@@ -1,7 +1,10 @@
 import axios from "axios";
+
 import { API_SERVER_HOST } from "./config";
 
-const host = `${API_SERVER_HOST}`;
+export { API_SERVER_HOST };
+
+const host = API_SERVER_HOST;
 
 //비즈니스 광고 게시글
 export const postItemBoardAdd = async (formData) => {
