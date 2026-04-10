@@ -40,34 +40,38 @@ const requestFail = (err) => {
   console.log("request error. ........................................ ");
   return Promise.reject(err);
 };
-// //before return response 성공적인 응답이 왔을 때 추가 작업
-// const beforeRes = async (res) => {
-//   console.log(
-//     "before return response .......................................... ",
-//   );
-//   return res;
-// };
 
 //before return response 성공적인 응답이 왔을 때 추가 작업
 const beforeRes = async (res) => {
-  console.log(
-    "before return response............................................... ",
-  );
-  console.log(res);
   const data = res.data;
 
-  //accessToken 에러
+  // 1. 만약 액세스 토큰 에러가 났다면?
   if (data && data.error === "ERROR_ACCESS_TOKEN") {
     const memberCookieValue = getCookie("member");
+    
+    console.log("토큰 만료 감지! 갱신 시도 중...");
+
+    // 2. 리프레시 토큰으로 새 토큰 받아오기
     const result = await refreshJWT(
       memberCookieValue.accessToken,
-      memberCookieValue.refreshToken,
+      memberCookieValue.refreshToken
     );
-    console.log("refreshJWT RESULT", result);
+
+    console.log("새로운 토큰 도착:", result);
+
+    // 3. 쿠키 업데이트 (최신 토큰으로 갈아치우기)
     memberCookieValue.accessToken = result.accessToken;
     memberCookieValue.refreshToken = result.refreshToken;
     setCookie("member", JSON.stringify(memberCookieValue), 1);
+
+    // 4. [매우 중요] 원래 실패했던 요청을 '새 토큰'으로 다시 보내기!
+    const originalRequest = res.config; 
+    originalRequest.headers.Authorization = `Bearer ${result.accessToken}`;
+    
+    // axios()로 다시 쏘면, 사용자는 에러가 났었는지도 모르게 데이터가 짠! 하고 뜹니다.
+    return axios(originalRequest); 
   }
+  
   return res;
 };
 
