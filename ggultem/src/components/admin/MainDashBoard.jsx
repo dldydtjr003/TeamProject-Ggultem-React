@@ -71,12 +71,15 @@ const MainDashBoard = () => {
                 <section className="list-section">
                     <h3>커뮤니티 최신글</h3>
                     <ul>
-                        {lists.latestCommunity?.length > 0 ? lists.latestCommunity.map(item => (
-                            <li key={item.boardNo}>
-                                {item.title.length > 18 ? item.title.substring(0, 18) + "..." : item.title}
-                                <span>{item.writer}</span>
-                            </li>
-                        )) : <li>게시글이 없습니다. 🐝</li>}
+                        {lists.latestCommunity?.length > 0 ? lists.latestCommunity.map(item => {
+                            const title = item.title || "제목 없음";
+                            return (
+                                <li key={item.boardNo}>
+                                    {item.title.length > 18 ? item.title.substring(0, 18) + "..." : item.title}
+                                    <span>{item.writer}</span>
+                                </li>
+                            );
+                        }) : <li>게시글이 없습니다. 🐝</li>}
                     </ul>
                 </section>
 
@@ -94,12 +97,15 @@ const MainDashBoard = () => {
                 <section className="list-section report-section">
                     <h3>신고 미처리 내역 ⚠️</h3>
                     <ul>
-                        {lists.latestReports?.length > 0 ? lists.latestReports.map(item => (
-                            <li key={item.reportId} className="urgent">
-                                [{item.reportType}] {item.reason.length > 15 ? item.reason.substring(0, 15) + "..." : item.reason}
-                                <span>{item.targetMemberId?.split('@')[0]}</span>
-                            </li>
-                        )) : <li>미처리 내역이 없습니다. ✅</li>}
+                        {lists.latestReports?.length > 0 ? lists.latestReports.map(item => {
+                            const reason = item.reson || "사유없음";
+                            return (
+                                <li key={item.reportId} className="urgent">
+                                    [{item.reportType}] {item.reason.length > 15 ? item.reason.substring(0, 15) + "..." : item.reason}
+                                    <span>{item.targetMemberId?.split('@')[0]}</span>
+                                </li>
+                            );
+                        }) : <li>미처리 내역이 없습니다. ✅</li>}
                     </ul>
                 </section>
             </div>
