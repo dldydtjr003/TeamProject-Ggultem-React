@@ -11,7 +11,7 @@ export const getOne = async (no) => {
 };
 
 export const getBannerList = async () => {
-  const res = await jwtAxios.get(`${host}/admin/banner/list`);
+  const res = await axios.get(`${host}/admin/banner/list`);
   return res.data;
 };
 
