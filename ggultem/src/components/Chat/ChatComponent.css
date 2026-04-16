@@ -4,7 +4,7 @@
   flex-direction: column;
   height: 75vh; /* 지훈님 화면에 맞춰 조정하세요 */
   width: 100%;
-  max-width: 450px;
+  max-width: 810px;
   margin: 0 auto;
   background-color: #eeeeee; /* 카카오톡 배경색 */
   border: 1px solid #ddd;
